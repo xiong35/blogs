@@ -29,7 +29,7 @@
     </script>
         }) -->
 
-    <div id="app">
+    <!-- <div id="app">
         　　<div class="outeer" @click.capture="outer">
             　　　　<div class="middle" @click.stop.capture="middle">
                 　　　　　　<button @click.once="inner">点击我(^_^)</button>
@@ -53,6 +53,23 @@
                 outer: function () {
                     alert('outer: 这是外面的Div')
                 }
+            }
+        })
+    </script> -->
+    <div id="app">
+        <p>.number修饰符</p>
+        <input type="number" v-model.number="val">
+        <p>我的数据类型是：{{ typeof(val) }}</p>
+        <input type="number" v-model.number="msg_number">
+        <br>
+        <span>{{msg_number}}</span>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                val: 18,
+                msg_number: 90
             }
         })
     </script>
