@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <ul id="example">
+        <li v-for="item in items" :key="item.message">
+            {{ item.message }}
+        </li>
+    </ul>
+    <script>
+        var app = new Vue({
+            el: '#example',
+            data: {
+                items: [
+                    { message: 'Hello Vue!' },
+                    { message: 'Hello adsfsd!' },
+                    { message: 'Hello Vzfvasue!' },
+                    { message: 'Hello DSVC!' },
+                ]
+            }
+
+    </script>
+        }) -->
+
+    <div id="app">
+        　　<div class="outeer" @click.capture="outer">
+            　　　　<div class="middle" @click.stop.capture="middle">
+                　　　　　　<button @click.once="inner">点击我(^_^)</button>
+                　　　　</div>
+            　　</div>
+        　　<p>{{ message }}</p>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data() {
+                return { message: '测试冒泡事件' }
+            },
+            methods: {
+                inner: function () {
+                    alert('inner： 这是最里面的Button')
+                },
+                middle: function () {
+                    alert('middle: 这是中间的Div')
+                },
+                outer: function () {
+                    alert('outer: 这是外面的Div')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
