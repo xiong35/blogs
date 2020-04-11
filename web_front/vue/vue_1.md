@@ -155,7 +155,7 @@ var vm = new Vue({
 计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数  
 这也同样意味着下面的计算属性将不再更新，因为 Date.now() 不是响应式依赖:
 
-```html
+```js
 computed: {
   now: function () {
     return Date.now()
@@ -169,7 +169,7 @@ computed: {
 
 尽量避免滥用watch, 改用计算属性:
 
-```html
+```js
 var vm = new Vue({
   el: '#demo',
   data: {
@@ -196,7 +196,7 @@ getter: @property
 
 计算属性默认只有 getter，不过在需要时也可以提供一个 setter:
 
-```html
+```js
 computed: {
   fullName: {
     // getter
@@ -217,7 +217,7 @@ computed: {
 
 ## 5 watch
 
-```html
+```js
   watch: {
     // 如果 `question` 发生改变，这个函数就会运行
     question: function (newQuestion, oldQuestion) {
