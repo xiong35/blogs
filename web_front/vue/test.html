@@ -6,70 +6,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Document</title>
+    <style>
+        .list-item {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .list-enter-active,
+        .list-leave-active {
+            transition: all 1s;
+        }
+
+        .list-leave-active {
+            position: absolute;
+        }
+
+        .list-enter,
+        .list-leave-to {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .list-move {
+            transition: transform 1s;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <ul id="example">
-        <li v-for="item in items" :key="item.message">
-            {{ item.message }}
-        </li>
-    </ul>
-    <script>
-        var app = new Vue({
-            el: '#example',
-            data: {
-                items: [
-                    { message: 'Hello Vue!' },
-                    { message: 'Hello adsfsd!' },
-                    { message: 'Hello Vzfvasue!' },
-                    { message: 'Hello DSVC!' },
-                ]
-            }
 
-    </script>
-        }) -->
-
-    <!-- <div id="app">
-        　　<div class="outeer" @click.capture="outer">
-            　　　　<div class="middle" @click.stop.capture="middle">
-                　　　　　　<button @click.once="inner">点击我(^_^)</button>
-                　　　　</div>
-            　　</div>
-        　　<p>{{ message }}</p>
+    <div id="list-demo" class="demo">
+        <button v-on:click="add">Add</button>
+        <button v-on:click="remove">Remove</button>
+        <transition-group name="list" tag="p">
+            <span v-for="item in items" v-bind:key="item" class="list-item">
+                {{ item }}
+            </span>
+        </transition-group>
     </div>
     <script>
-        let app = new Vue({
-            el: '#app',
-            data() {
-                return { message: '测试冒泡事件' }
+        new Vue({
+            el: '#list-demo',
+            data: {
+                items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                nextNum: 10
             },
             methods: {
-                inner: function () {
-                    alert('inner： 这是最里面的Button')
+                randomIndex: function () {
+                    return Math.floor(Math.random() * this.items.length)
                 },
-                middle: function () {
-                    alert('middle: 这是中间的Div')
+                add: function () {
+                    this.items.splice(this.randomIndex(), 0, this.nextNum++)
                 },
-                outer: function () {
-                    alert('outer: 这是外面的Div')
-                }
-            }
-        })
-    </script> -->
-    <div id="app">
-        <p>.number修饰符</p>
-        <input type="number" v-model.number="val">
-        <p>我的数据类型是：{{ typeof(val) }}</p>
-        <input type="number" v-model.number="msg_number">
-        <br>
-        <span>{{msg_number}}</span>
-    </div>
-    <script>
-        let app = new Vue({
-            el: '#app',
-            data: {
-                val: 18,
-                msg_number: 90
+                remove: function () {
+                    this.items.splice(this.randomIndex(), 1)
+                },
             }
         })
     </script>
