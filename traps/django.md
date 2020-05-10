@@ -32,7 +32,7 @@ response["Access-Control-Expose-Headers"] = "*"
 [r.f.](https://www.cnblogs.com/caimuqing/p/6733405.html)
 
 
-- 基于类视图的缓存
+- 基于数据库+类视图的缓存
 
 ```python
 # python manage.py createcachetable TABLE_NAME
@@ -54,3 +54,25 @@ class HelloPage(View):
         print("enter HelloPage.get")
 
         return HttpResponse('Hello world ...')
+```
+
+- 基于redis的缓存
+
+```python
+# pip install django-redis
+# pip install django-redis-cache
+
+# setting.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient'
+        }
+    }
+}
+
+# 下载安装redis: https://www.runoob.com/redis/redis-install.html
+# SHELL: redis-server
+```
