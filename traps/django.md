@@ -17,3 +17,16 @@ class CORSMid(MiddlewareMixin):
         response["Access-Control-Allow-Origin"] = "*"
         return response
 ```
+
+- 已拦截跨源请求：同源策略禁止读取位于 http://127.0.0.1:8000/artical/blog/ 的远程资源。（原因：CORS 预检响应的 'Access-Control-Allow-Headers'，不允许使用头 'content-type'）
+```python
+response["Access-Control-Allow-Origin"] = "*"
+response["Access-Control-Allow-Origin"] = "*"
+response["Access-Control-Allow-Credentials"] = "true"
+response["Access-Control-Allow-Methods"] = "*"
+response["Access-Control-Allow-Headers"] = "Content-Type,Access-Token"
+response["Access-Control-Expose-Headers"] = "*"
+```
+    headers:{'Content-Type': 'application/json'}
+
+[r.f.](https://www.cnblogs.com/caimuqing/p/6733405.html)
