@@ -30,3 +30,27 @@ response["Access-Control-Expose-Headers"] = "*"
     headers:{'Content-Type': 'application/json'}
 
 [r.f.](https://www.cnblogs.com/caimuqing/p/6733405.html)
+
+
+- 基于类视图的缓存
+
+```python
+# python manage.py createcachetable TABLE_NAME
+
+""" 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'TABLE_NAME',
+    }
+} """
+
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+class HelloPage(View):
+    @method_decorator(cache_page(60*60*24))
+    def get(self,request):
+        print("enter HelloPage.get")
+
+        return HttpResponse('Hello world ...')
