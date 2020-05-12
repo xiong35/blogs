@@ -2,7 +2,10 @@
 - router-link 如何设置为 \<a/\> 以外的元素
 - \<router-link tag="div" to="/blog"\>
 
-- 动态绑定标题
+# vue中
+## 设置动态绑定网站标题
+
+在main.js里添加
 
 ```js
 Vue.directive('title', {
@@ -10,18 +13,12 @@ Vue.directive('title', {
     document.title = el.dataset.title
   }
 })
+```
 
-const routes = [
-  { path: '/a', component: { template: '<div v-title data-title="标题内容aaa">内容aaaa</div>' } },
-  { path: '/b', component: { template: '<div v-title data-title="标题内容bbb">内容bbbb</div>' } }
-]
+同时在 template 里加上
 
-const router = new VueRouter({
-  routes
-})
-
-new Vue({
-    router,
-  el: '#app'
-})
+```html
+<template>
+  <div v-title data-title="标题内容aaa">内容aaaa</div>
+</template>
 ```

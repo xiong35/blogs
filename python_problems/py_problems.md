@@ -60,14 +60,14 @@
 
 e.g.
 
+```python
     def function(arg,*args,**kwargs):
         print(arg,args,kwargs)
 
     function(6, 7, 8, 9, a=1, b=2, c=3)
+```
 
-结果：
-
-    6 (7, 8, 9) {'a': 1, 'b': 2, 'c': 3}
+结果：```6 (7, 8, 9) {'a': 1, 'b': 2, 'c': 3}```
 
 ### > 命名空间
 
@@ -112,9 +112,11 @@ e.g.
 
 装饰器模式：
 
+```python
     @funA
     def funB():
         pass
+```
 
 等价于```funB = funA(funB)```  
 
@@ -124,6 +126,7 @@ e.g.
 
 e.g.
 
+```python
     class Foo:
         count = o
 
@@ -133,17 +136,19 @@ e.g.
 
         def __init__(self):
             Foo.count += 1
-
         # ...
+```
 
 ### > 静态方法/抽象方法
 
 静态方法：  
 不依赖其他任何属性的方法可被封装成静态方法，静态方法不能继承，可看作全局函数，如：
 
+```python
     @staticmethod
     def getHelp(cls):
         print(cls.help)
+```
 
 详情点[这里](https://www.cnblogs.com/ForT/articles/10658593.html)
 
@@ -165,6 +170,7 @@ e.g.
 
 ### > 骚操作杂项
 
+```python
     if answer not in 'yY':
 
     a, b = c, d
@@ -217,3 +223,4 @@ e.g.
     s = Student()
     s.score = 66 # execute @setter
     print(s.score) # execute @property
+```
