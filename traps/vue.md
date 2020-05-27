@@ -22,3 +22,34 @@ Vue.directive('title', {
   <div v-title data-title="标题内容aaa">内容aaaa</div>
 </template>
 ```
+
+# 使用 Nuxt+Vuetify 时
+## 引入 FontAwesome5 图标出现问题
+
+正确的引入方法是
+
+```bashscript
+npm install @fortawesome/fontawesome-free -D
+```
+
+```js
+// nuxt.config,js 中
+  buildModules: [
+    '@nuxtjs/vuetify',
+  ],
+  css: [
+    '@fortawesome/fontawesome-free/css/all.css'
+  ],
+  vuetify: {
+    icons: {
+      iconfont: 'fa',
+    }
+  },
+```
+
+```html
+<!-- vue 文件中 -->
+<v-icon small left>fas fa-home</v-icon>
+<v-icon small left>fab fa-weixin</v-icon>
+<!-- 注意这里有 fas fab far 等一系列乱七八糟的... -->
+```
