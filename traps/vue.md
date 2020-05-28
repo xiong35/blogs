@@ -53,3 +53,23 @@ npm install @fortawesome/fontawesome-free -D
 <v-icon small left>fab fa-weixin</v-icon>
 <!-- 注意这里有 fas fab far 等一系列乱七八糟的... -->
 ```
+
+# 使用 vuetify 时
+## 找不到 v-col 对应的 xs 的 flex 布局
+
+当前版本(@nuxtjs/vuetify 1.11.2)**确实没有** xs 布局, 但是想要实现这个布局怎么办呢? 可以指定默认布局
+
+```html
+<v-col
+  class="col-12"
+  sm="6"
+  md="4"
+  lg="3"
+>
+  <v-card class="pa-2">
+    One of three columns
+  </v-card>
+</v-col>
+```
+
+```class="col-12"```就是指定的默认布局
