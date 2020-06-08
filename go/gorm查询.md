@@ -3,7 +3,7 @@
 
 ## 根据id查
 
-```golang
+```go
 var userF User1
 var userL User1
 var usersA []User1
@@ -19,7 +19,7 @@ db.Find(&usersA) // 所有
 
 基本同于sql语句
 
-```golang
+```go
 // IN
 db.Where("name IN (?)", []string{"jinzhu", "jinzhu 2"}).Find(&users)
 // SELECT * FROM users WHERE name in ('jinzhu','jinzhu 2');
@@ -35,7 +35,7 @@ db.Where("name = ? AND age >= ?", "jinzhu", "22").Find(&users)
 
 ## not / or
 
-```golang
+```go
 /* NOT */
 // Not In
 db.Not("name", []string{"jinzhu", "jinzhu 2"}).Find(&users)
@@ -59,7 +59,7 @@ db.Where("role = ?", "admin").Or("role = ?", "super_admin").Find(&users)
 
 e.g.
 
-```golang
+```go
 db.Where(User{Name: "non_existing"}).Attrs(User{Age: 20}).FirstOrCreate(&user)
 
 db.Where(User{Name: "non_existing"}).Assign(User{Age: 20}).FirstOrInit(&user)
@@ -67,7 +67,7 @@ db.Where(User{Name: "non_existing"}).Assign(User{Age: 20}).FirstOrInit(&user)
 
 ## 高级查询
 
-```golang
+```go
 db.Select("name, age").Find(&users)
 // SELECT name, age FROM users;
 
@@ -94,10 +94,10 @@ db.Table("users").Select("users.name, emails.email").Joins("left join emails on 
 
 基础
 
-```golang
+```go
 type test struct {
-	ID   int
-	Name string // 必须首字母大写
+    ID   int
+    Name string // 必须首字母大写
 }
 
 var users []test
@@ -106,7 +106,7 @@ db.Table("user1").Select("id, name").Scan(&users)
 
 复杂
 
-```golang
+```go
 type Result struct {
     Date     time.Time
     TotalAge int // 注意驼峰/蛇形命名
@@ -134,4 +134,24 @@ for rows.Next() {
     rows.Scan(&result.Date, &result.TotalAge)
     fmt.Println(result)
 }
+```
+
+## preload
+
+```go
+type User struct {
+    gorm.Model
+    Username string
+    // 注意这里有一对多
+    Orders Order
+}
+type Order struct {
+    gorm.Model
+    UserID uint
+    Price float64
+}
+// Preload 方法的参数应该是主结构体的字段名
+db.Where("state = ?", "active").Preload("Orders", "state NOT IN (?)", "cancelled").Find(&users)
+// SELECT * FROM users WHERE state = 'active';
+// SELECT * FROM orders WHERE user_id IN (1,2) AND state NOT IN ('cancelled');
 ```

@@ -9,7 +9,7 @@ go get -u github.com/jinzhu/gorm
 
 ## 基本的增删改查
 
-```golang
+```go
 // 生成的数据表叫"product_infos" ps.有"s"
 type ProductInfo struct {
 	gorm.Model // gorm.Model 中自带创建时间, 修改时间, 删除时间, id 字段
@@ -46,13 +46,13 @@ func main() {
 
 ## mysql
 
-```golang
+```go
 db, err := gorm.Open("mysql", "root:xyl0321@/demo_db?charset=utf8&parseTime=True&loc=Local")
 ```
 
 ## 定义字段
 
-```golang
+```go
 type User struct {
 	gorm.Model
 	Name         string
@@ -69,7 +69,7 @@ type User struct {
 
 ## 默认值 / 指针值 / Debug()
 
-```golang
+```go
 type User struct {
 	ID   int32
 	Name *string `gorm:"default:'lalala'"` // use pointer to allow ""

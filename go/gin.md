@@ -59,7 +59,7 @@ func main() {
 
 ## log
 
-```golang
+```go
 func main() {
 	// 禁用控制台颜色
 	// gin.DisableConsoleColor()
