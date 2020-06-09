@@ -15,16 +15,16 @@ go mod edit -require github.com/gin-gonic/gin@latest
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
 )
 
 func main() {
 
-	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
-	router.Run(":8080")
+    router := gin.Default()
+    router.GET("/ping", func(c *gin.Context) {
+        c.String(200, "pong")
+    })
+    router.Run(":8080")
 }
 ```
 
@@ -34,26 +34,26 @@ func main() {
 
 ```go
 type userInfo struct {
-	Username string `form:"username" json:"username"`
-	Password string `form:"password" json:"password"`
+    Username string `form:"username" json:"username"`
+    Password string `form:"password" json:"password"`
 }
 
 func main() {
-	r := gin.Default()
-	r.POST("/user", func(c *gin.Context) {
-		var user userInfo
-		err := c.ShouldBind(&user)
-		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
-		}
-		fmt.Printf("%#v\n", user)
-		c.JSON(http.StatusOK, gin.H{
-			"message": "ok",
-			"user":    user,
-		})
-	})
+    r := gin.Default()
+    r.POST("/user", func(c *gin.Context) {
+        var user userInfo
+        err := c.ShouldBind(&user)
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{
+                "error": err.Error(),
+            })
+        }
+        fmt.Printf("%#v\n", user)
+        c.JSON(http.StatusOK, gin.H{
+            "message": "ok",
+            "user":    user,
+        })
+    })
 }
 ```
 
@@ -61,20 +61,20 @@ func main() {
 
 ```go
 func main() {
-	// 禁用控制台颜色
-	// gin.DisableConsoleColor()
+    // 禁用控制台颜色
+    // gin.DisableConsoleColor()
 
-	// 创建记录日志的文件
-	f, _ := os.Create("gin.log")
+    // 创建记录日志的文件
+    f, _ := os.Create("gin.log")
 
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
+    gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
 
-	router := gin.Default()
-	router.GET("/ping", func(c *gin.Context) {
-		c.String(200, "pong")
-	})
+    router := gin.Default()
+    router.GET("/ping", func(c *gin.Context) {
+        c.String(200, "pong")
+    })
 
-	router.Run(":8080")
+    router.Run(":8080")
 }
 ```
 
@@ -83,24 +83,24 @@ func main() {
 ```go
 func main() {
 
-	router := gin.Default()
-	// 真-重定向
-	router.GET("/ping", func(c *gin.Context) {
-		c.Redirect(http.StatusMovedPermanently, "/pong")
-	})
-	router.GET("/pong", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"pong": "pong"})
-	})
-	// 不会修改浏览器里的url
-	router.GET("/a", func(c *gin.Context) {
-		c.Request.URL.Path = "/b"
-		router.HandleContext(c)
-	})
-	router.GET("/b", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"c": "c"})
-	})
+    router := gin.Default()
+    // 真-重定向
+    router.GET("/ping", func(c *gin.Context) {
+        c.Redirect(http.StatusMovedPermanently, "/pong")
+    })
+    router.GET("/pong", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"pong": "pong"})
+    })
+    // 不会修改浏览器里的url
+    router.GET("/a", func(c *gin.Context) {
+        c.Request.URL.Path = "/b"
+        router.HandleContext(c)
+    })
+    router.GET("/b", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"c": "c"})
+    })
 
-	router.Run(":8080")
+    router.Run(":8080")
 }
 ```
 
@@ -123,21 +123,21 @@ router.NoRoute(func(c *gin.Context) {
 ```go
 func main() {
 
-	router := gin.Default()
+    router := gin.Default()
 
-	articleGroup := router.Group("/article")
+    articleGroup := router.Group("/article")
 
-	articleGroup.GET("/tags", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"tags": "[1,2,3]"})
-	})
-	articleGroup.GET("/blog", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"blog": "some blog"})
-	})
-	articleGroup.GET("/trap", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"trap": "some trap"})
-	})
+    articleGroup.GET("/tags", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"tags": "[1,2,3]"})
+    })
+    articleGroup.GET("/blog", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"blog": "some blog"})
+    })
+    articleGroup.GET("/trap", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{"trap": "some trap"})
+    })
 
-	router.Run(":8080")
+    router.Run(":8080")
 }
 ```
 
@@ -145,33 +145,33 @@ func main() {
 
 ```go
 func handler(c *gin.Context) {
-	fmt.Println("handle")
-	c.Set("key", gin.H{
-		"i":  "can",
-		"be": "any type",
-	})
+    fmt.Println("handle")
+    c.Set("key", gin.H{
+        "i":  "can",
+        "be": "any type",
+    })
 }
 
 func md1(c *gin.Context) {
     start := time.Now()
     
-	c.Next() // c.Abort()
+    c.Next() // c.Abort()
     
     cost := time.Since(start)
 
-	c.JSON(http.StatusOK, gin.H{
-		"time": cost,
-		"val":  c.MustGet("key"), // c.Get() return a bonus bool
-	})
+    c.JSON(http.StatusOK, gin.H{
+        "time": cost,
+        "val":  c.MustGet("key"), // c.Get() return a bonus bool
+    })
 }
 
 func main() {
 
-	router := gin.Default()
+    router := gin.Default()
 
-	router.GET("/md", md1, handler)
+    router.GET("/md", md1, handler)
 
-	router.Run(":8080")
+    router.Run(":8080")
 }
 ```
 
@@ -183,9 +183,9 @@ func main() {
 func main() {
     router := gin.Default()
 
-	router.Static("/assets", "./assets")
-	router.StaticFS("/more_static", http.Dir("my_file_system"))
-	router.StaticFile("/favicon.ico", "./resources/favicon.ico")
+    router.Static("/assets", "./assets")
+    router.StaticFS("/more_static", http.Dir("my_file_system"))
+    router.StaticFile("/favicon.ico", "./resources/favicon.ico")
 
     router.Run(":8080")
 }

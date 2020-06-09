@@ -25,13 +25,13 @@
 package main
 
 import (
-	"test/a"
-	"test/a/bb"
+    "test/a"
+    "test/a/bb"
 )
 
 func main() {
-	a.Add(1, 2)
-	bb.Say()
+    a.Add(1, 2)
+    bb.Say()
 }
 ```
 
@@ -42,8 +42,8 @@ package a
 import "test/a/bb"
 
 func Add(a int, b int) int {
-	bb.Say()
-	return a + b
+    bb.Say()
+    return a + b
 }
 ```
 
@@ -54,6 +54,6 @@ package bb
 import "fmt"
 
 func Say() {
-	fmt.Printf("hello")
+    fmt.Printf("hello")
 }
 ```

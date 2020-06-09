@@ -92,9 +92,9 @@ int main(void)
 
 int main(void) 
 {
-	printf("hello world!");
+    printf("hello world!");
     getchar()
-	return 0;
+    return 0;
 }
 ```
 

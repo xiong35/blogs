@@ -92,21 +92,21 @@
 
 ```json
 {
-	"basic c/cpp": {
-		"scope": "c, cpp",
-		"prefix": "#inc, #include",
-		"body": [
-			"#include <stdio.h>",
-			"#include <stdlib.h>",
-			"",
-			"int main(void)",
-			"{",
-			"    ",
-			"    return 0;",
-			"}"
-		],
-		"description": "basic c/c++ snippet"
-	}
+    "basic c/cpp": {
+        "scope": "c, cpp",
+        "prefix": "#inc, #include",
+        "body": [
+            "#include <stdio.h>",
+            "#include <stdlib.h>",
+            "",
+            "int main(void)",
+            "{",
+            "    ",
+            "    return 0;",
+            "}"
+        ],
+        "description": "basic c/c++ snippet"
+    }
 }
 ```
 
@@ -118,15 +118,15 @@ prefix可以指定用什么前缀唤醒这段代码, 这里我指定了两个前
 
 ```json
 
-			"/**",
-			"* Author:",
-			"*     Xiong35",
-			"* Release Time:",
-			"*     $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
-			"* Description:",
-			"*     This is a program to $1",
-			"* Github:",
-			"*     https://github.com/xiong35",
+            "/**",
+            "* Author:",
+            "*     Xiong35",
+            "* Release Time:",
+            "*     $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE",
+            "* Description:",
+            "*     This is a program to $1",
+            "* Github:",
+            "*     https://github.com/xiong35",
             "*/",
 ```
 
