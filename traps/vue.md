@@ -73,3 +73,13 @@ npm install @fortawesome/fontawesome-free -D
 ```
 
 ```class="col-12"```就是指定的默认布局
+
+# 使用 nuxt 时想在 middleware 里获取 localStorage
+
+nuxt 会在服务端渲染, 而服务端没有浏览器对象, 无法获取 localStorage
+
+解决方案:
+
+在 mounted 钩子里强行实现跳转检验  
+
+或参考[这篇文章](https://zhuanlan.zhihu.com/p/82481387)
