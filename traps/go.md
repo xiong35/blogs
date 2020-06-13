@@ -1,5 +1,4 @@
-# 使用go引入外部包时
-## 直接引用报错: cannot find module providing package github.com/gin-gonic/gin: working directory is not part of a module
+# 使用go引入外部包时, 直接引用报错: cannot find module providing package github.com/gin-gonic/gin: working directory is not part of a module
 
 解决:
 

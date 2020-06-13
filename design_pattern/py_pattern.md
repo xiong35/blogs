@@ -67,16 +67,18 @@
 
 e.g. ：定义一个包装递推数列，增加储存功能的修饰器
 
-    def memoize(fn):
-        known = dict()
+```python
+def memoize(fn):
+    known = dict()
 
-        @functools.wraps(fn)
-        def memoizer(*args):
-            if args not in known:
-                known[args] = fn(*args)
-            return known[args]
-            
-        return memoizer
+    @functools.wraps(fn)
+    def memoizer(*args):
+        if args not in known:
+            known[args] = fn(*args)
+        return known[args]
+        
+    return memoizer
+```
 
 其中```@functools.wraps(fn)```的作用是保证包装后函数的名字等信息不改变，一般包装时都会加上这一句，不加也无太大妨碍  
 

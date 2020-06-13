@@ -3,7 +3,7 @@
 
 ## mod
 
-首先执行```go mod init test```, 创建一个 mod 文件
+首先执行```go mod init your-name```, 创建一个 mod 文件
 
 ## 目录结构
 
@@ -57,3 +57,5 @@ func Say() {
     fmt.Printf("hello")
 }
 ```
+
+注意包名**尽量**和文件夹同名

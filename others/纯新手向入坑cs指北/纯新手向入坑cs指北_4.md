@@ -1,7 +1,7 @@
 
 # 新手向入坑cs指北--C语言进阶
 
-> 看这篇文章前, 请先确保你已经有一定的编程经验了, 至少得把我[前面那篇文章](http://101.133.217.104/blog/static/blog/40)里讲到的3个推荐教程看了一个半个的吧
+> 看这篇文章前, 请先确保你已经有一定的编程经验了, 至少得把我[前面那篇文章](http://xiong35.cn/blog2.0/articles/blog/30)里讲到的3个推荐教程看了一个半个的吧
 
 你是否有以下苦恼?
 
@@ -67,7 +67,7 @@
 devc++ 只是最简单的那一批IDE, 想走的更快更远, 你需要更强大的工具!
 
 - [visual studio](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16)(社区免费版): 公认强大的IDE, 缺点是太强大了以至于有很多你用不上的功能, 而且有好几个G
-- [visual studio code](https://aka.ms/win32-x64-user-stable): 首先, 这玩意和visual studio基本没关系, 是两个完全不同的东西. 其次, 这不是一个ide, 而是一个编辑器, 你可以理解为一个更强的记事本...但是他真的太强了...此外, 他需要一番配置, 具体参见[这篇文章](http://101.133.217.104/blog/static/blog/31)
+- [visual studio code](https://aka.ms/win32-x64-user-stable): 首先, 这玩意和visual studio基本没关系, 是两个完全不同的东西. 其次, 这不是一个ide, 而是一个编辑器, 你可以理解为一个更强的记事本...但是他真的太强了...此外, 他需要一番配置, 具体参见[这篇文章](http://xiong35.cn/blog/static/blog/31)
 - [cLion](https://www.jetbrains.com/clion/)(教育版是免费的, 需要学校的邮箱): 我本人没用过, 但是用过他们家的其他软件, 挺好用的.
 
 > 这些工具和devc++的用法都有很大差异, 一开始用不来很正常, 有问题多搜索一下, 实在不行可以来问我

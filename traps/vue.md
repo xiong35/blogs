@@ -2,8 +2,7 @@
 - router-link 如何设置为 \<a/\> 以外的元素
 - \<router-link tag="div" to="/blog"\>
 
-# vue中
-## 设置动态绑定网站标题
+# vue中设置动态绑定网站标题
 
 在main.js里添加
 
@@ -23,8 +22,7 @@ Vue.directive('title', {
 </template>
 ```
 
-# 使用 Nuxt+Vuetify 时
-## 引入 FontAwesome5 图标出现问题
+# 使用 Nuxt+Vuetify 时, 引入 FontAwesome5 图标出现问题
 
 正确的引入方法是
 
@@ -54,8 +52,7 @@ npm install @fortawesome/fontawesome-free -D
 <!-- 注意这里有 fas fab far 等一系列乱七八糟的... -->
 ```
 
-# 使用 vuetify 时
-## 找不到 v-col 对应的 xs 的 flex 布局
+# 使用 vuetify 时, 找不到 v-col 对应的 xs 的 flex 布局
 
 当前版本(@nuxtjs/vuetify 1.11.2)**确实没有** xs 布局, 但是想要实现这个布局怎么办呢? 可以指定默认布局
 

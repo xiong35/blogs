@@ -102,4 +102,4 @@ int main(void)
 
 ---
 
-[下一篇文章](http://101.133.217.104/blog/static/blog/40)会讲一些小细节, 也来看看吧!
+[下一篇文章](http://xiong35.cn/blog2.0/articles/blog/28)会讲一些小细节, 也来看看吧!
