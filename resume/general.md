@@ -30,3 +30,13 @@
 - git / markdown / latex / sql / linux 等常用技能
 - numpy / pandas / matplotlib 等python数据分析工具
 - 计算机网络相关知识
+
+### web
+
+- Web开发：熟练掌握python, 熟练应用golang
+- Web框架：熟练掌握django和gin框架, 有用二者分别开发博客后端的经历
+- 前端框架：熟练掌握vue及其生态, 熟练掌握bootstrap, 有用vue, bootstrap, nuxt开发博客的经历
+- 前端工具：熟练使用npm
+- 数据库相关：熟练应用mysql, 会使用redis和sqlite 
+- 版本管理、文档和自动化部署工具：熟练掌握git, 熟练使用docker
+- 操作系统：掌握linux基本操作, 熟练使用linux开发
