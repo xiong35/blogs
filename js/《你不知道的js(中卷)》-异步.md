@@ -1,0 +1,101 @@
+
+# 《你不知道的js(中卷)》-异步
+
+## 代码块
+
+由于 js 单线程的特点, 程序段中的**代码块具有原子性**
+
+```js
+var a = 20; 
+
+function foo() { 
+    a *= 2;
+    console.log(a)
+} 
+function bar() { 
+    a += 1;
+    console.log(a)
+} 
+// ajax(..)是某个库中提供的某个Ajax函数
+ajax( "http://some.url.1", foo ); 
+ajax( "http://some.url.2", bar );
+```
+
+由于 `foo()` 不会被 `bar()` 中断，`bar()` 也不会被 `foo()` 中断，所以这个程序只有两个可能的输出，取决于这两个函数哪个先运行
+
+同一段代码有两个可能输出意味着还是存在不确定性！但是，这种不确定性是在**函数**（事件）顺序级别上，而不是多线程情况下的语句顺序级别（或者说，表达式运算顺序级别）。换句话说，这一确定性要高于多线程情况
+
+## promise
+
+### 如何保证promise会有结果
+
+```js
+// 用于超时一个Promise的工具
+function timeoutPromise(delay) { 
+    return new Promise( function(resolve,reject){ 
+        setTimeout( function(){ 
+            reject( "Timeout!" ); 
+        }, delay ); 
+    } ); 
+} 
+// 设置foo()超时
+Promise.race( [ 
+    foo(), // 试着开始foo() 
+    timeoutPromise( 3000 ) // 给它3秒钟
+]) 
+.then( 
+    function(){ 
+        // foo(..)及时完成！
+    }, 
+    function(err){ 
+        // 或者foo()被拒绝，或者只是没能按时完成
+        // 查看err来了解是哪种情况
+    } 
+);
+```
+
+### resolve的参数问题
+
+> 内部判断是否为 promise 的方法大致为: 是对象+有then函数
+
+如果向 `Promise.resolve(..)` 传递一个非 Promise、非 thenable 的立即值，就会得到一个用这个值填充的 promise
+
+而如果向 `Promise.resolve(..)` 传递一个真正的 Promise，就只会返回**同一个 promise**
+
+如果向 `Promise.resolve(..)` 传递了一个非 Promise 的 thenable 值，前者就会试图展开这个值，而且展开过程会持续到提取出一个具体的非类 Promise 的最终值
+
+```js
+var p = { 
+    then: function(cb,errcb) { 
+        cb( 42 ); 
+        errcb( "evil laugh" ); 
+    } 
+};
+
+p 
+.then( 
+    function fulfilled(val){ 
+        console.log( val ); // 42 
+    }, 
+    function rejected(err){ 
+        // 啊，不应该运行！
+        console.log( err ); // 邪恶的笑
+    } 
+);
+```
+
+但是`Promise.resolve(..)` 可以接受任何 thenable，将其解封为它的非 thenable 值。从 `Promise.resolve(..)` 得到的是一个真正的 Promise，是一个可以信任的值。如果你传入的已经是真正的 Promise，那么你得到的就是它本身，所以通过 `Promise.resolve(..)` **过滤**来获得可信任性完全没有坏处
+
+```js
+// 不要只是这么做：
+foo( 42 ) 
+.then( function(v){ 
+    console.log( v ); 
+}); 
+
+// 而要这么做：
+Promise.resolve( foo( 42 ) ) 
+.then( function(v){ 
+    console.log( v ); 
+} );
+```
