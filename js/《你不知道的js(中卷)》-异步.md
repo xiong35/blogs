@@ -99,3 +99,72 @@ Promise.resolve( foo( 42 ) )
     console.log( v ); 
 } );
 ```
+
+## boss 战
+
+以下代码的运行结果为?
+
+```js
+async function async1() {
+    console.log("async1 start");
+    await async2();
+    console.log("async1 end");
+}
+
+async function async2() {
+    console.log("async2");
+}
+
+console.log("script start");
+
+setTimeout(function() {
+    console.log("setTimeout");
+}, 0);
+
+async1();
+
+new Promise(function(resolve) {
+    console.log("promise1");
+    resolve();
+}).then(function() {
+    console.log("promise2");
+});
+
+console.log("script end");
+```
+
+### 前置知识
+
+#### 宏任务 / 微任务
+
+- 宏任务
+  - 整体代码
+  - setTimeout, setInterval
+- 微任务
+  - Promise.then
+  - process.nextTick
+
+![event_loop](https://s1.ax1x.com/2020/06/26/NrpBY4.png)
+
+#### async / await
+
+带 async 标记的函数返回值:
+
+- 如果为 Promise 对象: 直接返回
+- 如果为立即值, 将他包装成 Promise 再返回
+- 如果没有指定, 返回 `Promise.resolve(undefined)`
+
+await 表达式等的是什么?
+
+- Promise: 值为传递给这个 Promise 的 resolve 函数的参数
+- 立即值: 将立即值包装为 Promise, 再立刻 resolve
+
+await 会先执行其后面的表达式, 直到最后化简为一个 Promise, 然后将这个 Promise 的 then 操作加入微任务队列, 阻塞后面的操作. 等他被 resolve 了再继续运行后面的代码
+
+### 题解
+
+![js_problems_solution](https://s1.ax1x.com/2020/06/26/NrAS9U.png)
+
+运行结果为:
+
+![js_problems_result](https://s1.ax1x.com/2020/06/26/NrA8Et.png)
