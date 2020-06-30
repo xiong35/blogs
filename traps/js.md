@@ -32,3 +32,16 @@ behavior: "smooth"
 
 (a, b)=> { a + b } // undefined
 ```
+
+# 优雅地在浏览器中调试
+
+```js
+function potentiallyBuggyCode() {
+    debugger;
+    // do potentially buggy stuff to examine, step through, etc.
+}
+```
+
+代码会在运行到`debugger`时自动暂停!!!
+
+详见[MDN debugger](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/debugger)
