@@ -96,3 +96,15 @@ class Foo {
 ```
 
 这样才能快乐的使用 this
+
+# map parseInt
+
+```js
+[1,2,3].map(parseInt);
+//-> [1, NaN, NaN]
+```
+
+`parseInt`接受两个参数, 第二个参数如果为 0, 就会默认parse十进制
+
+而`map`函数传递两个参数: `val, ind`, 当 `ind`(即`parseInt`的第二个参数不为 0)时, 返回`NaN`
+
