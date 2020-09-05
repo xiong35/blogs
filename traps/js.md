@@ -108,3 +108,12 @@ class Foo {
 
 而`map`函数传递两个参数: `val, ind`, 当 `ind`(即`parseInt`的第二个参数不为 0)时, 返回`NaN`
 
+# 浏览器提示框
+
+```js
+alert("...");       // 返回 undefined
+
+confirm("...");     // 返回 true/false
+
+prompt("...");      // 返回用户输入, 取消则返回 null
+```
