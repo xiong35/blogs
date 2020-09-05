@@ -117,3 +117,106 @@ confirm("...");     // 返回 true/false
 
 prompt("...");      // 返回用户输入, 取消则返回 null
 ```
+
+# js ...args探究
+
+```js
+
+let fn1 = (args1, ...args2) => {
+    console.log(args1);
+    console.log(args2);
+}
+
+// error, Rest parameter must be last formal parameter
+let fn2 = (...args1, ...args2) => {/* ... */}   
+
+
+fn1(1, 2, 3)
+// 1
+// [2, 3]
+
+fn1(1)
+// 1
+// []
+
+fn1()
+// undefined
+// []
+```
+
+# 后端使用form接受数据带来的问题
+
+在某项目中后端使用了`contentType = "application/x-www-form-urlencoded"`而非`"application/json"`来获取数据, 带来了以下问题:
+
+1. 前端用 js 发送数据(而非用 html 的表单)时需要对数据进行预处理
+2. 难以发送复杂度格式的数据, 如多级 对象/列表 嵌套
+
+解决:
+
+1. 引入 **qs** 模块, 生成 form 格式请求
+
+```js
+import qs from "qs";    // 下载并引入这个序列化模块
+
+export async function POST(
+  url,
+  data,
+  contentType = "application/json"
+) {
+  if (contentType == "application/x-www-form-urlencoded") {
+    data = qs.stringify(data);  // 进行序列化
+  }
+
+  let res = await request({
+    url,
+    data,
+    method: "POST",
+    headers: {
+      "Content-Type": contentType,
+    },
+  });
+}
+```
+
+2. 目前没找到很好的的解决方案, 暂时的解决方案是把需要用到复杂数据的接口临时改为 json 格式
+
+# js 上传图片等文件
+
+```js
+async function upload(url, data) {
+  let res = await request({
+    url,
+    data,
+    method: "POST",
+    headers: {
+      "Content-Type": "multipart/form-data;",
+    },
+  });
+}
+
+function selectFile() {
+  return new Promise((res, rej) => {
+    const el = document.createElement("input");
+    el.type = "file";
+    el.accept = this.accept;
+    el.multiple = false;
+    el.addEventListener("change", (_) => {
+      res(el.files[0]);
+    });
+    el.click();
+  });
+}
+
+async function uploadFile() {
+  let file = await this.selectFile();
+
+  if (!file || !~this.accept.indexOf(file.type)) {
+    return;
+  }
+
+  let formData = new FormData(); //创建form对象
+  formData.append("file", file); //通过append向form对象添加数据
+
+  let res = await upload("/img", formData);
+}
+```
