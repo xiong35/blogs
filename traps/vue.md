@@ -80,3 +80,7 @@ nuxt 会在服务端渲染, 而服务端没有浏览器对象, 无法获取 loca
 在 mounted 钩子里强行实现跳转检验  
 
 或参考[这篇文章](https://zhuanlan.zhihu.com/p/82481387)
+
+# vue template 中无法使用 window 对象
+
+vue template 中无法使用 window 对象, 只有在 script 里才能使用

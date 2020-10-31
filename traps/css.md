@@ -30,3 +30,7 @@
 7. 光标属性：`cursor`
 8. 页面样式属性：`page`、`page-break-inside`、`windows`、`orphans`
 9. 声音样式属性：`speak`、`speak-punctuation`、`speak-numeral`、`speak-header`、`speech-rate`、`volume`、`voice-family`、 `pitch`、`pitch-range`、`stress`、`richness`、`azimuth`、`elevation`
+
+# 不要用 px!!!
+
+真的不要用 px 把界面写死, 尽量用别的属性替换, 不然改起来太太太麻烦了QWQ 
