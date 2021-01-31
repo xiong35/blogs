@@ -34,3 +34,10 @@
 # 不要用 px!!!
 
 真的不要用 px 把界面写死, 尽量用别的属性替换, 不然改起来太太太麻烦了QWQ 
+
+# css timing 函数
+
+参考
+
+- [jump 函数详解](https://segmentfault.com/a/1190000019371312)
+- [mdn 文档(英文)](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)
