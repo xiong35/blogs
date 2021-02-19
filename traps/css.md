@@ -41,3 +41,19 @@
 
 - [jump 函数详解](https://segmentfault.com/a/1190000019371312)
 - [mdn 文档(英文)](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)
+
+# 增大按钮的点击范围
+
+我认为较好的一种方式: 利用透明的伪元素增大点击范围
+
+```css
+.btn::before {
+  content: "";
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  bottom: -1rem;
+  left: -1rem;
+  border-radius: 50%;
+}
+```
