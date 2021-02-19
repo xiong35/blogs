@@ -220,3 +220,7 @@ async function uploadFile() {
   let res = await upload("/img", formData);
 }
 ```
+
+# img 的 onload 回调
+
+html 中 img 在 src 的资源完全加载后会触发 onload 回调, 可以利用这个特性在 img 加载时展示 placeholder, 在加载好后隐藏 placeholder
