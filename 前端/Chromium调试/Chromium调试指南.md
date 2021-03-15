@@ -11,13 +11,13 @@
 
 有时候我们会为元素的 hover 设置一个样式, 但是调试的时候只有把鼠标移上去才能看见样式, 很麻烦.
 
-Chrome 里可以直接模拟这种状态
+Chromium 里可以直接模拟这种状态
 
 ![force_class](https://s3.ax1x.com/2021/03/10/6GOuRJ.png)
 
 ## 录制屏幕
 
-Chrome 提供了录屏功能, 可以录制页面的整个加载过程, 方便检查分析
+Chromium 提供了录屏功能, 可以录制页面的整个加载过程, 方便检查分析
 
 ![capture_images](https://s3.ax1x.com/2021/03/10/6GO1qx.png)
 
@@ -119,5 +119,5 @@ console 自带 `async` 包裹, 可以直接写 `await` 语句!
 ## 参考
 
 - [dev tips](https://umaar.com/dev-tips/)
-- [Chrome高阶调试指南](https://zhuanlan.zhihu.com/p/62177097)
-- [Chrome调试技巧](https://www.frontendwingman.com/Chrome/)
+- [Chromium高阶调试指南](https://zhuanlan.zhihu.com/p/62177097)
+- [Chromium调试技巧](https://www.frontendwingman.com/Chromium/)

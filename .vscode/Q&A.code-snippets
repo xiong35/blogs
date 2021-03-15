@@ -1,0 +1,12 @@
+{
+	"Q&A": {
+		"scope": "markdown",
+		"prefix": "QA",
+		"body": [
+			"**Q:** $1  ",
+			"**A:** $2",
+			""
+		],
+		"description": "Q&A"
+	}
+}
