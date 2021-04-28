@@ -30,30 +30,3 @@
 7. 光标属性：`cursor`
 8. 页面样式属性：`page`、`page-break-inside`、`windows`、`orphans`
 9. 声音样式属性：`speak`、`speak-punctuation`、`speak-numeral`、`speak-header`、`speech-rate`、`volume`、`voice-family`、 `pitch`、`pitch-range`、`stress`、`richness`、`azimuth`、`elevation`
-
-# 不要用 px!!!
-
-真的不要用 px 把界面写死, 尽量用别的属性替换, 不然改起来太太太麻烦了QWQ 
-
-# css timing 函数
-
-参考
-
-- [jump 函数详解](https://segmentfault.com/a/1190000019371312)
-- [mdn 文档(英文)](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function)
-
-# 增大按钮的点击范围
-
-我认为较好的一种方式: 利用透明的伪元素增大点击范围
-
-```css
-.btn::before {
-  content: "";
-  position: absolute;
-  top: -1rem;
-  right: -1rem;
-  bottom: -1rem;
-  left: -1rem;
-  border-radius: 50%;
-}
-```
