@@ -84,3 +84,22 @@ nuxt 会在服务端渲染, 而服务端没有浏览器对象, 无法获取 loca
 # vue template 中无法使用 window 对象
 
 vue template 中无法使用 window 对象, 只有在 script 里才能使用
+
+# `ref<T>` get `Ref<UnwrapRef<T>>`
+
+```ts
+// 这么写, `data`的类型是`Ref<UnwrapRef<T>>`而不是`Ref<T>`
+const data = ref<T[]>([]);
+
+// 这么写就好了 XD
+const data = ref([]) as Ref<T[]>;
+```
+
+参考 [#2522](https://github.com/vuejs/vue-next/issues/2522)
+
+# vite 打包工具的坑
+
+
+vite 使用的打包工具不是 Babel, 而是 esbuild, 它对 es6 以后的新语法支持并不完全. 
+例如 condition chaining (`a?.b?.c`) 的语法就没被编译掉, 导致在手机浏览器上无法解析...  
+debug 了一万年终于解决了QWQ(方法是不用这个语法了...有更好的方法请戳我 TAT)
