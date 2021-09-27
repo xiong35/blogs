@@ -1,5 +1,6 @@
-
 # 封装 ts 友好的 axios
+
+> 关键词: TypeScript
 
 尽管 axios 自带有很不错的 ts 类型支持, 但是也有一个致命的问题: 请求得到的东西
 的类型是`any`, 如果处理不当会带来很多不必要的强制类型转换
@@ -16,13 +17,13 @@ export function request<T>(config: AxiosRequestConfig) {
     withCredentials: false,
   });
 
-  instance.interceptors.request.use((config) => { }, console.error);
+  instance.interceptors.request.use((config) => {}, console.error);
 
   instance.interceptors.response.use(
     (response) => {
       return response.data || {};
     },
-    (err) => { }
+    (err) => {}
   );
 
   // 返回一个 promise, 其resolve的值是与后端定义好的统一格式, 而 data 字段类型是传入的泛型参数
@@ -39,12 +40,10 @@ interface Response<T> {
 }
 
 /* 使用 */
-export async function search(
-  params: {
-    page: number;
-    keyword: string;
-  }
-): Promise<Item[]> {
+export async function search(params: {
+  page: number;
+  keyword: string;
+}): Promise<Item[]> {
   const res = await request<{ items: Item[] }>({
     url: "/search/item",
     method: "GET",

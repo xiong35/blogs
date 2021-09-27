@@ -1,7 +1,8 @@
-
 # golang 的 hello world
 
-> 亲测1.14.4版本可用
+> 关键词: golang, 工具记录
+
+> 亲测 1.14.4 版本可用
 
 ## 下载
 
@@ -27,7 +28,7 @@ go
     +-- golang.org
 ```
 
-切换到 github.com 文件夹, 执行```git clone https://github.com/golang/tools.git tools```, 会将相关配置下载到 tools 文件夹
+切换到 github.com 文件夹, 执行`git clone https://github.com/golang/tools.git tools`, 会将相关配置下载到 tools 文件夹
 
 将 tools 文件夹复制到 golang.org 文件夹里
 
@@ -58,38 +59,38 @@ func main() {
 ```json
 // launch
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Launch",
-            "type": "go",
-            "request": "launch",
-            "mode": "debug",
-            "remotePath": "",
-            "port": 2345,
-            "host": "127.0.0.1",
-            "program": "${workspaceFolder}/src/${fileBasenameNoExtension}.go",
-            "env": {
-                "GOPATH": "C:/Users/xiong35/go"
-            },
-            "args": [],
-            "showLog": true,
-            "trace": "log"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "remotePath": "",
+      "port": 2345,
+      "host": "127.0.0.1",
+      "program": "${workspaceFolder}/src/${fileBasenameNoExtension}.go",
+      "env": {
+        "GOPATH": "C:/Users/xiong35/go"
+      },
+      "args": [],
+      "showLog": true,
+      "trace": "log"
+    }
+  ]
 }
 ```
 
 ```json
 // settings
 {
-    "go.autocompleteUnimportedPackages": true,
-    "go.gocodePackageLookupMode": "go",
-    "go.gotoSymbol.includeImports": true,
-    "go.useCodeSnippetsOnFunctionSuggest": true,
-    "go.inferGopath": true,
-    "go.gopath": "C:/Users/Administrator/go",
-    "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+  "go.autocompleteUnimportedPackages": true,
+  "go.gocodePackageLookupMode": "go",
+  "go.gotoSymbol.includeImports": true,
+  "go.useCodeSnippetsOnFunctionSuggest": true,
+  "go.inferGopath": true,
+  "go.gopath": "C:/Users/Administrator/go",
+  "go.useCodeSnippetsOnFunctionSuggestWithoutType": true
 }
 ```
 

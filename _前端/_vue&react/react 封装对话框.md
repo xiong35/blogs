@@ -1,5 +1,6 @@
-
 # react 封装对话框
+
+> 关键词: React
 
 ## 需求
 
@@ -24,7 +25,7 @@ import OutlinedBtn from "../components/CommonOutlinedBtn";
  *    函数返回的 promise 所 resolve 的值为字符串, 对应所点击的 action 的按钮内文字
  * @return {Promise<string>} resolve 的值为点击的按钮内的文字(string类型)
  */
-export default async (text, actions=["取消", "确认"]) => {
+export default async (text, actions = ["取消", "确认"]) => {
   // 创建一个挂载 dialog box 的元素
   let div = document.createElement("div");
   // 绑定唯一 id
@@ -90,10 +91,7 @@ const TRANSITION = 150; // ms
  *    函数返回的 promise 所 resolve 的值为字符串, 对应所点击的 action 的按钮内文字
  * @return {Promise<string>} resolve 的值为点击的按钮内的文字(string类型)
  */
-export default async function showDialog(
-  content,
-  actions = ["取消", "确认"]
-) {
+export default async function showDialog(content, actions = ["取消", "确认"]) {
   // 创建一个挂载 dialog box 的元素
   let div = document.createElement("div");
   // 绑定唯一 id
@@ -134,7 +132,7 @@ export default async function showDialog(
             // 重新渲染组件, 与原组件的区别是此组件透明度为 0
             // 由于还给组件设置了 transition, 透明度就会平滑的降为 0
             isMasked={false}
-            isMaskedChange={() => { }}
+            isMaskedChange={() => {}}
           />,
           div
         );

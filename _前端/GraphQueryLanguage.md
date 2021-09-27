@@ -1,8 +1,8 @@
-
 # Graph Query Language(GQL)
 
-## 为啥要用 GQL
+> 关键词: 前端杂记, 后端杂记
 
+## 为啥要用 GQL
 
 ### rest api 的痛点
 
@@ -34,8 +34,8 @@
 - 利用收藏夹的接口, 但是传入一个参数, 代表是否需要具体的商品: 增加逻辑判断, 当接口复杂起来前后端都不好维护
 - 再开一个新的接口: 接口更多, 变得不好维护
 
-这3种方案都不够好. 此外, 收藏夹和推荐商品都用到了商品信息的接口, 但是可能要获取的字段不一样(比如收藏夹里要多一个收藏时间), 同样带来了维护问题
-  
+这 3 种方案都不够好. 此外, 收藏夹和推荐商品都用到了商品信息的接口, 但是可能要获取的字段不一样(比如收藏夹里要多一个收藏时间), 同样带来了维护问题
+
 当接口间互相依赖, 甚至有调用的先后关系时, 往往形成的不是一个平行的结构(即 rest 接口最常见的结构), 而是树甚至是图的结构. 诚然可以通过新增特定的专门的 rest 接口或者通过增加条件判断来凑, 但是都有不好维护的问题, rest 接口适合解决**一个资源的问题**, 而非一组相互依赖的资源
 
 ### 用 GQL 解决这个痛点
@@ -52,7 +52,7 @@ gql 就是专门用来处理相互依赖的图状接口的.
 
 ### Apollo GQL 库
 
-官方文档(英文版): [apollo gql文档](https://www.apollographql.com/docs/tutorial/introduction)
+官方文档(英文版): [apollo gql 文档](https://www.apollographql.com/docs/tutorial/introduction)
 
 这个库前端可适配多种框架, 后端使用 node, 核心在于解析你的 gql 语句, 判断出你具体的查询, 然后需要后端实现对某个字段具体查询的返回结果(可以是 api 请求, 也可以是查数据库等). 他做的工作实际上是将复杂度 gql 请求拆解为独立的, 不可再分的基本字段, 最后将这些字段根据查询语句进行组装而返回
 
@@ -69,6 +69,6 @@ gql 就是这么一个中间层, 解耦了前端查询和后端逻辑, 虽然性
 
 ## 参考
 
-- [github gql文档](https://developer.github.com/v4/)
+- [github gql 文档](https://developer.github.com/v4/)
 - [xiong35 github api 的使用](http://www.xiong35.cn/blog2.0/articles/blog/88)
-- [apollo gql文档](https://www.apollographql.com/docs/tutorial/introduction)
+- [apollo gql 文档](https://www.apollographql.com/docs/tutorial/introduction)

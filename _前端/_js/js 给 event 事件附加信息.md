@@ -1,5 +1,6 @@
-
 # js 给 event 事件附加信息
+
+> 关键词: JavaScript, 工具记录
 
 场景: 需要做一个拖拽照片到垃圾桶组件进行删除的功能, 但是  
 如果使用原生的 onDrop 事件只能在垃圾桶上监听, 且 `e.target` 也是垃圾桶, 无法获得被丢下的照片的 id  
@@ -11,11 +12,11 @@
 
 ```js
 // image 组件上的拖拽开始时附加其 id
-onDragStart= (e) => e.dataTransfer.setData("id", image.id)
+onDragStart = (e) => e.dataTransfer.setData("id", image.id);
 
 // bin 组件上的 drop 事件里即可获得被拖动的 image 的 id
 onDrop = (e) => {
-    const id = e.dataTransfer.getData("id");
-    /* ... */
-}
+  const id = e.dataTransfer.getData("id");
+  /* ... */
+};
 ```

@@ -1,5 +1,6 @@
-
 # html 表单知识摘要
+
+> 关键词: HTML
 
 - 表单中组件的属性一览
   - `value` 为提交时的值
@@ -16,9 +17,9 @@
 - select(弹出的选择菜单) 应该这样写:
 
   ```html
-  <select name="mycar"> 
-      <option value="三菱" selected>三菱</option>
-      <option value="奥迪">奥迪</option>
-      <option value="MINI">MINI</option>
+  <select name="mycar">
+    <option value="三菱" selected>三菱</option>
+    <option value="奥迪">奥迪</option>
+    <option value="MINI">MINI</option>
   </select>
   ```

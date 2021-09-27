@@ -1,5 +1,6 @@
-
 # js 上传图片等文件
+
+> 关键词: JavaScript, 工具记录
 
 ```js
 async function upload(url, data) {

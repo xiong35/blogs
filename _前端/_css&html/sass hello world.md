@@ -1,5 +1,6 @@
-
 # sass hello world
+
+> 关键词: CSS
 
 在开始前, 你可以看看: [Sass 与 SCSS 是什么关系？](https://zhuanlan.zhihu.com/p/21319396)
 
@@ -21,17 +22,17 @@ node-sass -v    # 验证是否成功
 
 ```scss
 body {
-    font-size: 18px;
+  font-size: 18px;
 }
 ```
 
-在**工作路径**下打开命令行, 输入`node-sass --output-style compressed sass/hello.scss > css/hello.css`, 即可看到css文件夹下出现被编译好的css文件!
+在**工作路径**下打开命令行, 输入`node-sass --output-style compressed sass/hello.scss > css/hello.css`, 即可看到 css 文件夹下出现被编译好的 css 文件!
 
 > --output-style 可选值如下:  
-> nested：(根据sass的嵌套)嵌套缩进的css代码，它是默认值  
-> expanded：没有缩进的、扩展的css代码  
-> compact：简洁格式的css代码  
-> compressed：压缩后的css代码
+> nested：(根据 sass 的嵌套)嵌套缩进的 css 代码，它是默认值  
+> expanded：没有缩进的、扩展的 css 代码  
+> compact：简洁格式的 css 代码  
+> compressed：压缩后的 css 代码
 
 还可以对修改开启监视, 自动编译  
 在工作目录下输入以下指令: `node-sass -wro css scss --output-style nested`
@@ -58,10 +59,12 @@ h1 {
 /* 编译后
    css   */
 div {
-  background-color: #287fd6; }
+  background-color: #287fd6;
+}
 
 h1 {
-  border: 1px solid #287fd6; }
+  border: 1px solid #287fd6;
+}
 ```
 
 ### 嵌套
@@ -81,11 +84,14 @@ h1 {
 /* 编译后
    css   */
 .nav {
-  height: 100px; }
-  .nav ul {
-    margin: 0; }
-    .nav ul li {
-      padding: 5px; }
+  height: 100px;
+}
+.nav ul {
+  margin: 0;
+}
+.nav ul li {
+  padding: 5px;
+}
 ```
 
 但是有这种情况:
@@ -102,9 +108,12 @@ a {
 /* 编译后
    css   */
 a {
-  margin: 0; }
-  a :hover {    // 不行!
-    color: blue; }
+  margin: 0;
+}
+a :hover {
+  // 不行!
+  color: blue;
+}
 ```
 
 我们可以使用父选择器(在使用伪类等时常用)
@@ -113,7 +122,8 @@ a {
 /* scss */
 a {
   margin: 0;
-  &:hover {     // 父选择器
+  &:hover {
+    // 父选择器
     padding: 5px;
   }
   &pple {
@@ -124,11 +134,15 @@ a {
 /* 编译后
    css   */
 a {
-  margin: 0; }
-  a:hover {     // ok!
-    padding: 5px; }
-  apple {
-    padding: 5px; }
+  margin: 0;
+}
+a:hover {
+  // ok!
+  padding: 5px;
+}
+apple {
+  padding: 5px;
+}
 ```
 
 属性嵌套:
@@ -151,10 +165,11 @@ a {
    css   */
 .nav {
   border: 1px solid #ccc;
-    border-left: 0;
-    border-right: 0;
+  border-left: 0;
+  border-right: 0;
   font-weight: bold;
-  font-size: 14px; }
+  font-size: 14px;
+}
 ```
 
 ### mixin
@@ -163,25 +178,29 @@ a {
 
 ```scss
 /* scss */
-@mixin theme($text-color: #222, $bgc: #ddd) {   // 设置默认值
+@mixin theme($text-color: #222, $bgc: #ddd) {
+  // 设置默认值
   color: $text-color;
   background-color: $bgc;
-  a {           // 内部嵌套选择
-    color: darken($text-color, 10%);    // 内置函数
+  a {
+    // 内部嵌套选择
+    color: darken($text-color, 10%); // 内置函数
   }
 }
 
 .nav {
-  @include theme($bgc: #eee);   // 如果是不带参数的, 可以不写括号
+  @include theme($bgc: #eee); // 如果是不带参数的, 可以不写括号
 }
 
 /* 编译后
    css   */
 .nav {
   color: #222;
-  background-color: #ddd; }
-  .nav a {
-    color: #090909; }
+  background-color: #ddd;
+}
+.nav a {
+  color: #090909;
+}
 ```
 
 ### extend
@@ -203,31 +222,36 @@ a {
 
 /* 编译后
    css   */
-.nav, .nav-info {
-  padding: 10px; }
+.nav,
+.nav-info {
+  padding: 10px;
+}
 
-.nav a, .nav-info a {
-  font-weight: bold; }
+.nav a,
+.nav-info a {
+  font-weight: bold;
+}
 
 .nav-info {
-  background-color: #3499d3; }
+  background-color: #3499d3;
+}
 ```
 
 ### import
 
 > css 直接 import 会发送多次 http 请求, sass 的 import 则是直接打包成一个文件
 
-被 import 的文件被称为"partial", partial 的文件名必须以"_"开头:
+被 import 的文件被称为"partial", partial 的文件名必须以"\_"开头:
 
 ```scss
 /* _base.scss */
 body {
   padding: 0;
-  margin: 0; 
+  margin: 0;
 }
 
 /* hello.scss */
-@import "base";     // import 时既不用写后缀名, 又不用写下划线
+@import "base"; // import 时既不用写后缀名, 又不用写下划线
 
 .nav {
   padding: 10px;
@@ -237,10 +261,12 @@ body {
    css   */
 body {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+}
 
 .nav {
-  padding: 10px; }
+  padding: 10px;
+}
 ```
 
 ### comment
@@ -279,14 +305,14 @@ string
 - `to-upper-case(str)`, `to-lower-case(str)`
 - `str-length(str)`
 - `str-index(str, substr)`, 返回子串在父串中第一次出现的位置, 以**1**为起点!!!
-- `str-insert(target, str, ind)`, 把str插入到target的ind位置
+- `str-insert(target, str, ind)`, 把 str 插入到 target 的 ind 位置
 
 color
 
-- `adjust-hue(color, deg)`, deg是单位为`deg`的数字
+- `adjust-hue(color, deg)`, deg 是单位为`deg`的数字
 - `lighten/darken(color, percent)`
 - `saturate/desaturate(color, percent)`, 增加/减少饱和度
-- `opacify/transparency(color, alpha)`, 增加/减少alpha
+- `opacify/transparency(color, alpha)`, 增加/减少 alpha
 
 list
 
@@ -303,7 +329,7 @@ map
 - `map-keys(map)`, `map-values(map)`
 - `map-has-key(map)`
 - `map-merge(map, map)`
-- `map-remove(map, key, [key], ...)`, 返回新map, 而不改变原来的
+- `map-remove(map, key, [key], ...)`, 返回新 map, 而不改变原来的
 
 ### 插值表达式
 
@@ -325,7 +351,8 @@ $type: "info";
    css   */
 /*! version: 1.2.3 */
 .nav-info {
-  border-color: blue; }
+  border-color: blue;
+}
 ```
 
 ### 流程控制
@@ -345,7 +372,8 @@ $theme: "dark";
 }
 /* css */
 .nav {
-  color: white; }
+  color: white;
+}
 
 /* for */
 /* scss */
@@ -359,11 +387,14 @@ $columns: 4;
 }
 /* css */
 .col-1 {
-  width: 25%; }
+  width: 25%;
+}
 .col-2 {
-  width: 50%; }
+  width: 50%;
+}
 .col-3 {
-  width: 75%; }
+  width: 75%;
+}
 
 /* each */
 /* scss */
@@ -375,11 +406,14 @@ $items: success error warning;
 }
 /* css */
 .nav-success {
-  background-image: url(../images/success.png); }
+  background-image: url(../images/success.png);
+}
 .nav-error {
-  background-image: url(../images/error.png); }
+  background-image: url(../images/error.png);
+}
 .nav-warning {
-  background-image: url(../images/warning.png); }
+  background-image: url(../images/warning.png);
+}
 
 /* while */
 /* scss */
@@ -392,11 +426,14 @@ $i: 1;
 }
 /* css */
 .item-1 {
-  width: 5rem; }
+  width: 5rem;
+}
 .item-2 {
-  width: 10rem; }
+  width: 10rem;
+}
 .item-3 {
-  width: 15rem; }
+  width: 15rem;
+}
 ```
 
 ### function
@@ -423,5 +460,6 @@ body {
 
 /* css */
 body {
-  background-color: #eee; }
+  background-color: #eee;
+}
 ```

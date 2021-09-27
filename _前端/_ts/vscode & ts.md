@@ -1,5 +1,6 @@
-
 # vscode & ts
+
+> 关键词: TypeScript, 指北
 
 ## 下载 ts 编译环境
 
@@ -41,7 +42,7 @@
 }
 ```
 
-在工作目录执行 `npm run dev`, 或者直接点击vscode文件目录最下方出现的 npm 脚本的 dev 指令, 开启保存自动编译功能
+在工作目录执行 `npm run dev`, 或者直接点击 vscode 文件目录最下方出现的 npm 脚本的 dev 指令, 开启保存自动编译功能
 
 ## hello ts
 
@@ -52,6 +53,6 @@ const hello: string = "Hello World!";
 console.log(hello);
 ```
 
-保存后即可在 ./js 文件夹下看到 index.js, 即为编译后的js文件
+保存后即可在 ./js 文件夹下看到 index.js, 即为编译后的 js 文件
 
 在目录里输入 `ts-node index.ts` 即可直接执行 ts 代码

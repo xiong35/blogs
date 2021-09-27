@@ -1,7 +1,8 @@
+# 仿 react 实现 vDom(二)
 
-# 仿react实现vDom(二)
+> 关键词: JavaScript, 算法
 
-> 本文假设你已经对 vdom (虚拟dom树)有一定了解, 并且读过[前文](http://www.xiong35.cn/blog2.0/articles/blog/98)
+> 本文假设你已经对 vdom (虚拟 dom 树)有一定了解, 并且读过[前文](http://www.xiong35.cn/blog2.0/articles/blog/98)
 
 ## key 的作用
 
@@ -10,7 +11,7 @@
 一个 ul 有一堆 li 作为子元素, 然后你向 li 的最前面插入了一个 li  
 你期望能够直接插入新节点而不改变剩余节点, 但是按照上文的做法并不会实现这个效果
 
-实际上会发生什么?  
+实际上会发生什么?
 
 当你前序遍历(也就是上文中我们的遍历方式)并 diff 这些节点时, diff 算法会认为**每一个**节点的内容都改变了(变成了前一个节点的值), 他会修改每个节点的值, 并在最后插入一个节点  
 这显然不是我们需要的!
@@ -21,11 +22,11 @@
 
 1. for 新子节点 in 新节点列表
    1. 如果在旧节点列表里找得到相同类型元素
-      1. 将这个元素调整到合适的位置, 并递归的diff他们
+      1. 将这个元素调整到合适的位置, 并递归的 diff 他们
       2. 标记那个旧节点为 undefined
    2. 如果找不到
       1. 标记要创建新节点
-2. 将所有未被标记为 undefined 的旧子节点删除(因为可被复用的已经在1.1.2步中被标记过了)
+2. 将所有未被标记为 undefined 的旧子节点删除(因为可被复用的已经在 1.1.2 步中被标记过了)
 
 此过程可以用 hash 表(map 对象)加速, 此外还可应用优化调整顺序的算法, 详见[React 源码剖析系列 － 不可思议的 react diff](https://zhuanlan.zhihu.com/p/20346379)
 
@@ -92,8 +93,7 @@ class VDom {
     // replace
     if (
       typeof vDomOld !== typeof vDomNew ||
-      ((typeof vDomOld === "string" ||
-        typeof vDomOld === "number") &&
+      ((typeof vDomOld === "string" || typeof vDomOld === "number") &&
         vDomOld !== vDomNew) ||
       vDomOld.tag !== vDomNew.tag
     ) {
@@ -106,15 +106,9 @@ class VDom {
     // update child
     if (vDomOld.tag) {
       const propsDiff = this._diffProps(vDomOld, vDomNew);
-      const { children, moves } = this._diffChildren(
-        vDomOld,
-        vDomNew
-      );
+      const { children, moves } = this._diffChildren(vDomOld, vDomNew);
 
-      if (
-        propsDiff.length > 0 ||
-        children.some((patch) => !!patch)
-      ) {
+      if (propsDiff.length > 0 || children.some((patch) => !!patch)) {
         return {
           type: nodePatchTypes.UPDATE,
           props: propsDiff,
@@ -282,10 +276,7 @@ class VDom {
     }
     // replace
     else if (patchObj.type === nodePatchTypes.REPLACE) {
-      return parent.replaceChild(
-        this.createElement(patchObj.vDom),
-        element
-      );
+      return parent.replaceChild(this.createElement(patchObj.vDom), element);
     }
 
     // update
@@ -359,5 +350,5 @@ class VDom {
 
 - [你不知道的 Virtual DOM](https://segmentfault.com/a/1190000016129036)
 - [React 源码剖析系列 － 不可思议的 react diff](https://zhuanlan.zhihu.com/p/20346379)
-- [VirtualDOM与diff(Vue实现)](https://github.com/answershuto/learnVue/blob/master/docs/VirtualDOM%E4%B8%8Ediff(Vue%E5%AE%9E%E7%8E%B0).MarkDown)
-- [vue源码-dom diff](https://echizen.github.io/tech/2019/03-25-vue-dom-diff)
+- [VirtualDOM 与 diff(Vue 实现)](<https://github.com/answershuto/learnVue/blob/master/docs/VirtualDOM%E4%B8%8Ediff(Vue%E5%AE%9E%E7%8E%B0).MarkDown>)
+- [vue 源码-dom diff](https://echizen.github.io/tech/2019/03-25-vue-dom-diff)

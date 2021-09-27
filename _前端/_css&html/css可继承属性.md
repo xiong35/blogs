@@ -1,5 +1,6 @@
-
 # css 中可继承属性
+
+> 关键词: CSS
 
 1. 字体系列属性
 
@@ -21,7 +22,7 @@
 - `letter-spacing`：增加或减少字符间的空白（字符间距）
 - `text-transform`：控制文本大小写
 - `direction`：规定文本的书写方向
-- `color`：文本颜色, a元素除外
+- `color`：文本颜色, a 元素除外
 
 3. 元素可见性：`visibility`
 4. 表格布局属性：`caption-side`、`border-collapse`、`border-spacing`、`empty-cells`、`table-layout`

@@ -1,7 +1,8 @@
+# 仿 react 实现 vDom(一)
 
-# 仿react实现vDom(一)
+> 关键词: JavaScript, 算法
 
-> 本文假设你已经对 vdom (虚拟dom树)有一定了解
+> 本文假设你已经对 vdom (虚拟 dom 树)有一定了解
 
 ## 简介
 
@@ -41,7 +42,7 @@ const vdom = {
     },
     /* ... */
   ],
-}
+};
 ```
 
 ### render
@@ -63,9 +64,7 @@ const createElement = (vDom) => {
   }
 
   if (children) {
-    children
-      .map(createElement)
-      .forEach(element.appendChild.bind(element));
+    children.map(createElement).forEach(element.appendChild.bind(element));
   }
   return element;
 };
@@ -109,8 +108,7 @@ diff = (vDomOld, vDomNew) => {
   // 如果是不同的文本节点就替换文本
   if (
     typeof vDomOld !== typeof vDomNew ||
-    ((typeof vDomOld === "string" ||
-      typeof vDomOld === "number") &&
+    ((typeof vDomOld === "string" || typeof vDomOld === "number") &&
       vDomOld !== vDomNew) ||
     vDomOld.tag !== vDomNew.tag
   ) {
@@ -195,7 +193,7 @@ _diffChildren = (vDomOld, vDomNew) => {
     {
         type,
         propName,
-        value 
+        value
     },
     /* ... */
   ]
@@ -208,7 +206,7 @@ _diffChildren = (vDomOld, vDomNew) => {
 将 diff 产生的 patchObj 映射到真实 dom 上, 按照 diff 对 dom 进行修改
 
 ```js
-patch = (parent, patchObj, index = 0) => { 
+patch = (parent, patchObj, index = 0) => {
   // parent 是一个真实 dom 节点
   // index 是为了从 parent 里取出自己
   // 如果到头了或者遇到不需要修改的节点就直接跳过
@@ -241,10 +239,7 @@ patch = (parent, patchObj, index = 0) => {
 
   // replace
   else if (patchObj.type === nodePatchTypes.REPLACE) {
-    return parent.replaceChild(
-      createElement(patchObj.vDom),
-      element
-    );
+    return parent.replaceChild(createElement(patchObj.vDom), element);
   }
 };
 
@@ -274,5 +269,5 @@ _patchProps = (element, props) => {
 
 - [你不知道的 Virtual DOM](https://segmentfault.com/a/1190000016129036)
 - [React 源码剖析系列 － 不可思议的 react diff](https://zhuanlan.zhihu.com/p/20346379)
-- [VirtualDOM与diff(Vue实现)](https://github.com/answershuto/learnVue/blob/master/docs/VirtualDOM%E4%B8%8Ediff(Vue%E5%AE%9E%E7%8E%B0).MarkDown)
-- [vue源码-dom diff](https://echizen.github.io/tech/2019/03-25-vue-dom-diff)
+- [VirtualDOM 与 diff(Vue 实现)](<https://github.com/answershuto/learnVue/blob/master/docs/VirtualDOM%E4%B8%8Ediff(Vue%E5%AE%9E%E7%8E%B0).MarkDown>)
+- [vue 源码-dom diff](https://echizen.github.io/tech/2019/03-25-vue-dom-diff)

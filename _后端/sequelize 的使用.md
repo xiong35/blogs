@@ -1,5 +1,6 @@
-
 # sequelize 的使用
+
+> 关键词: Node.js, 后端杂记
 
 ## 引入、设置 sequelize
 
@@ -58,11 +59,7 @@ const TagModel = sequelize.define(
 );
 
 // 创建接邻表
-const ImageTagModel = sequelize.define(
-  "image_tag",
-  {},
-  { timestamps: false }
-);
+const ImageTagModel = sequelize.define("image_tag", {}, { timestamps: false });
 
 // 设置关系
 ImageModel.belongsToMany(TagModel, {
@@ -90,7 +87,7 @@ async function create({ tagNames, brief, file, level, datetime }) {
       name: tagNames.split(","),
     },
   });
-  
+
   const imageInfo = {
     brief,
     path: res.key,

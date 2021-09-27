@@ -1,7 +1,8 @@
-
 # gin 框架初探
 
-首先, 如果在新的目录里使用gin需要运行以下代码:
+> 关键词: golang
+
+首先, 如果在新的目录里使用 gin 需要运行以下代码:
 
 ```
 go mod init gin
@@ -104,7 +105,7 @@ func main() {
 }
 ```
 
-## any / 404 
+## any / 404
 
 Any 可以处理任何请求方法  
 NoRoute 会接住任何没被处理的请求
@@ -154,9 +155,9 @@ func handler(c *gin.Context) {
 
 func md1(c *gin.Context) {
     start := time.Now()
-    
+
     c.Next() // c.Abort()
-    
+
     cost := time.Since(start)
 
     c.JSON(http.StatusOK, gin.H{
@@ -175,7 +176,7 @@ func main() {
 }
 ```
 
-或者```router.Use(md1, md2)```, ```someGroup.Use(md1, md2)```
+或者`router.Use(md1, md2)`, `someGroup.Use(md1, md2)`
 
 ## static
 

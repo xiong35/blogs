@@ -1,5 +1,6 @@
-
 # shadow dom
+
+> 关键词: HTML
 
 ## 它是什么?
 
@@ -16,26 +17,25 @@ shadow dom 中的元素无法被访问, css 样式几乎无法修改, 事件对�
 
 ```html
 <span class="shadow-host">
-    <a href="https://twitter.com/ireaderinokun">
+  <a href="https://twitter.com/ireaderinokun">
     Follow @ireaderinokun
-    </a>
+  </a>
 </span>
 ```
 
 ```js
-const shadowEl = document.querySelector(".shadow-host") // 获取宿主
+const shadowEl = document.querySelector(".shadow-host"); // 获取宿主
 // 宿主中可以放退化样式/元素作为不支持 shadow dom / js 时的备选方案
-const shadow = shadowEl.attachShadow({mode: 'open'})    // 创建
+const shadow = shadowEl.attachShadow({ mode: "open" }); // 创建
 
 // 创建子元素
-const link = document.createElement("a")
-link.href = shadowEl.querySelector("a").href
-link.innerHTML =`
+const link = document.createElement("a");
+link.href = shadowEl.querySelector("a").href;
+link.innerHTML = `
     <span aria-label="Twitter icon"></span>
     ${shadowEl.querySelector("a").textContent}
-`
-shadow.appendChild(link);   // 并插入
-
+`;
+shadow.appendChild(link); // 并插入
 
 // 创建 style 元素以设置样式
 const styles = document.createElement("style");
@@ -57,8 +57,8 @@ span {
     background: transparent 0 0 no-repeat;
 }
 /* more styles */
-`
-shadow.appendChild(styles)  // 并插入
+`;
+shadow.appendChild(styles); // 并插入
 ```
 
 ## 对 shadow dom 内部的访问
@@ -66,14 +66,14 @@ shadow.appendChild(styles)  // 并插入
 通过某些特定的 api 可以访问, 但是兼容性不好
 
 ```css
-video::-webkit-media-controls-panel{
-    display:flex!important;
-    background-color: deeppink;
+video::-webkit-media-controls-panel {
+  display: flex !important;
+  background-color: deeppink;
 }
 ```
 
 ## 参考资料
 
 - [神秘的 shadow-dom 浅析](https://www.cnblogs.com/coco1s/p/5711795.html)
-- [\[译\]什么是Shadow Dom？](https://www.toobug.net/article/what_is_shadow_dom.html)
-- [什么是Shadow DOM？](https://segmentfault.com/a/1190000017970486)
+- [\[译\]什么是 Shadow Dom？](https://www.toobug.net/article/what_is_shadow_dom.html)
+- [什么是 Shadow DOM？](https://segmentfault.com/a/1190000017970486)

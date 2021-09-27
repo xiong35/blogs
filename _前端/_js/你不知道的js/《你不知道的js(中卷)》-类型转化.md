@@ -1,5 +1,6 @@
+# 《你不知道的 js(中卷)》-类型转化
 
-# 《你不知道的js(中卷)》-类型转化
+> 关键词: 读书笔记, JavaScript
 
 ## json
 
@@ -11,19 +12,18 @@
 如果 replacer 是一个数组，那么它必须是一个**字符串数组**，其中包含序列化**要处理**的对象的属性名称，除此之外其他的属性则被忽略。
 如果 replacer 是一个函数，它会**对对象本身调用一次，然后对对象中的每个属性各调用一次**，每次传递两个参数，键和值。如果要忽略某个键就返回 undefined，否则返回指定的值
 
-
 ```js
-var a = { 
-    b: 42,
-    c: "42",
-    d: [1,2,3] 
+var a = {
+  b: 42,
+  c: "42",
+  d: [1, 2, 3],
 };
 
-JSON.stringify( a, ["b","c"] ); // "{"b":42,"c":"42"}"
+JSON.stringify(a, ["b", "c"]); // "{"b":42,"c":"42"}"
 
-JSON.stringify( a, function(k,v){
-    if (k !== "c") return v;
-} );
+JSON.stringify(a, function (k, v) {
+  if (k !== "c") return v;
+});
 // "{"b":42,"d":[1,2,3]}"
 ```
 
@@ -41,28 +41,28 @@ JSON.stringify( a, function(k,v){
 
 ```js
 var a = {
-    valueOf: function(){
-        return "42";
-    }
+  valueOf: function () {
+    return "42";
+  },
 };
 
 var b = {
-    toString: function(){
-        return "42";
-    }
+  toString: function () {
+    return "42";
+  },
 };
 
-var c = [4,2];
-c.toString = function(){
-    return this.join( "" ); // "42"
+var c = [4, 2];
+c.toString = function () {
+  return this.join(""); // "42"
 };
 
-Number( a ); // 42
-Number( b ); // 42
-Number( c ); // 42
-Number( "" ); // 0
-Number( [] ); // 0
-Number( [ "abc" ] ); // NaN
+Number(a); // 42
+Number(b); // 42
+Number(c); // 42
+Number(""); // 0
+Number([]); // 0
+Number(["abc"]); // NaN
 ```
 
 ## falsy
@@ -80,36 +80,36 @@ Number( [ "abc" ] ); // NaN
 ```js
 ~42; // -(42+1) ==> -43
 
-~(-1); // -(-1+1) ==> 0
+~-1; // -(-1+1) ==> 0
 
-~a.indexOf( "lo" ); // 找到了就是真值, 找不到就是0!
+~a.indexOf("lo"); // 找到了就是真值, 找不到就是0!
 ```
 
 ```js
-Math.floor( -49.6 ); // -50
+Math.floor(-49.6); // -50
 
-~~(-49.6); // -49
-(-49.6) | 0; // -49
+~~-49.6; // -49
+-49.6 | 0; // -49
 ```
 
-> 位运算只适用于32位整型
+> 位运算只适用于 32 位整型
 
 ## parse...
 
 ```js
 var b = "42.6 rem";
 
-Number( b ); // NaN
-parseInt( b ); // 42
-parseFloat( b ); // 42.6
+Number(b); // NaN
+parseInt(b); // 42
+parseFloat(b); // 42.6
 
 /* notice */
-parseInt( 0.000008 ); // 0 ("0" 来自于 "0.000008")
-parseInt( 0.0000008 ); // 8 ("8" 来自于 "8e-7")
-parseInt( false, 16 ); // 250 ("fa" 来自于 "false")
-parseInt( parseInt, 16 ); // 15 ("f" 来自于 "function")
-parseInt( "0x10" ); // 16
-parseInt( "103", 2 ); // 2
+parseInt(0.000008); // 0 ("0" 来自于 "0.000008")
+parseInt(0.0000008); // 8 ("8" 来自于 "8e-7")
+parseInt(false, 16); // 250 ("fa" 来自于 "false")
+parseInt(parseInt, 16); // 15 ("f" 来自于 "function")
+parseInt("0x10"); // 16
+parseInt("103", 2); // 2
 ```
 
 ## 加法操作
@@ -118,9 +118,9 @@ parseInt( "103", 2 ); // 2
 如果其中一个操作数是对象（包括数组），则首先对其调用 `ToPrimitive` 抽象操作(调用`valueOf`, 如果没有再调用`toString`), 以数字作为上下文
 
 ```js
-({a: 42}) + "88"    // "[object Object]88"
-
-[1, 2] + [3, 4]     // "1,23,4"
+({ a: 42 } +
+  "88"[(1, 2)] + // "[object Object]88"
+  [3, 4]); // "1,23,4"
 ```
 
 ## 逻辑操作
@@ -132,10 +132,10 @@ var a = 42;
 var b = "abc";
 var c = null;
 
-a || b; // 42 
+a || b; // 42
 a && b; // "abc"
 
-c || b; // "abc" 
+c || b; // "abc"
 c && b; // null
 ```
 
@@ -158,11 +158,11 @@ c && b; // null
 - 尽量把两者都转化成数字比较
 
 ```js
-true == "42"
+true == "42";
 // 转化成
-1 == "42"
+1 == "42";
 // 转化成
-1 == 42 // false
+1 == 42; // false
 ```
 
 > 所以不要用 `xxx == true`, 改用`!!xxx`
@@ -170,10 +170,10 @@ true == "42"
 特殊:
 
 ```js
-[] == ![]   // true
-NaN != NaN  // true
-NaN != !NaN // true
-0 == "\n"   // true
+[] == ![]; // true
+NaN != NaN; // true
+NaN != !NaN; // true
+0 == "\n"; // true
 ```
 
 - 如果两边的值中有 `true` 或者 `false`，千万不要使用 ==。

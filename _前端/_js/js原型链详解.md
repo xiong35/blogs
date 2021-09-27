@@ -1,5 +1,6 @@
+# js 原型链详解
 
-# js原型链详解
+> 关键词: JavaScript
 
 ## 什么是原型链
 
@@ -21,20 +22,20 @@ function Foo() {
 }
 
 var foo = new Foo();
-foo.bar;    // -> "bar"
-foo.baz();  // "baz"
+foo.bar; // -> "bar"
+foo.baz(); // "baz"
 
 // 然后让一个新的类继承自他
 function Son() {
   this.qwq = "qwq";
 }
 
-Son.prototype = new Foo();          // 关键: 通过原型(prototype)实现继承
-Son.prototype.constructor = Son;    // 细节: 把构造函数改回来
+Son.prototype = new Foo(); // 关键: 通过原型(prototype)实现继承
+Son.prototype.constructor = Son; // 细节: 把构造函数改回来
 
 var son = new Son();
-son.qwq;    // -> "qwq"
-son.baz();  // "baz"
+son.qwq; // -> "qwq"
+son.baz(); // "baz"
 ```
 
 等等? 刚在发生了什么?
@@ -64,7 +65,7 @@ son.baz();  // "baz"
 
 ## 为什么要用原型链
 
-这是 js 的一个设计<del>缺陷</del>feature, 毕竟只用了10天写出来的语言, 俺也不太懂, 可能要是整的像 java 的继承那样会比较复杂? 这种继承方法虽然绕了一点, 但是实现起来好像也不复杂.
+这是 js 的一个设计<del>缺陷</del>feature, 毕竟只用了 10 天写出来的语言, 俺也不太懂, 可能要是整的像 java 的继承那样会比较复杂? 这种继承方法虽然绕了一点, 但是实现起来好像也不复杂.
 
 另外, ES6 新出了 class 语法, 看上去像是实现了常规的继承, 但是实际上只是对原型继承的语法糖, 本质上是没变的
 
@@ -80,9 +81,9 @@ son.baz();  // "baz"
 
 刚才我们只讨论了**获取**值, 那**赋值**的情况要怎么处理呢?
 
-参见[《你不知道的js》对象详解-原型](http://www.xiong35.cn/blog2.0/articles/blog/81)
+参见[《你不知道的 js》对象详解-原型](http://www.xiong35.cn/blog2.0/articles/blog/81)
 
 ## 参考资料
 
-- [知乎: js中__proto__和prototype的区别和关系？](https://www.zhihu.com/question/34183746/answer/58155878)
-- [《你不知道的js》对象详解-原型](http://www.xiong35.cn/blog2.0/articles/blog/81)
+- [知乎: js 中**proto**和 prototype 的区别和关系？](https://www.zhihu.com/question/34183746/answer/58155878)
+- [《你不知道的 js》对象详解-原型](http://www.xiong35.cn/blog2.0/articles/blog/81)

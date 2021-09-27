@@ -1,9 +1,10 @@
-
 # Chromium 调试指南
+
+> 关键词: 浏览器
 
 ## 保存变量值
 
-调试过程中有可能会需要将一些变量值保存下来, 这时候只要在想要保存的变量上点击右键, 选择`Store as global variable`, 就可以在Console面板里使用这个变量(`temp1, temp2, temp3, ...`)
+调试过程中有可能会需要将一些变量值保存下来, 这时候只要在想要保存的变量上点击右键, 选择`Store as global variable`, 就可以在 Console 面板里使用这个变量(`temp1, temp2, temp3, ...`)
 
 ![save_as_global](https://s3.ax1x.com/2021/03/10/6GOJIO.png)
 
@@ -52,7 +53,7 @@ console 自带 `async` 包裹, 可以直接写 `await` 语句!
 
 ## console 里的内置函数/对象
 
-- `$`: 相当于`querySelect`函数, 参数为querySelect的字符串, 返回值为 dom 节点
+- `$`: 相当于`querySelect`函数, 参数为 querySelect 的字符串, 返回值为 dom 节点
 - `$$`: 相当于`querySelectAll`函数, 用法同上
 - `$_`: 返回上一个 console 中运行语句的返回值
 - `$0, $1, $2 ...`: 返回当前/上一个/上两个被聚焦到的 dom 节点
@@ -84,11 +85,9 @@ console 自带 `async` 包裹, 可以直接写 `await` 语句!
 
 ![animation_picker](https://s3.ax1x.com/2021/03/10/6GOwQA.png)
 
-
-
 ## 更多工具
 
-在面板里还能找到更多工具! 
+在面板里还能找到更多工具!
 
 ![more_tools](https://s3.ax1x.com/2021/03/10/6GOQMR.png)
 
@@ -119,5 +118,5 @@ console 自带 `async` 包裹, 可以直接写 `await` 语句!
 ## 参考
 
 - [dev tips](https://umaar.com/dev-tips/)
-- [Chromium高阶调试指南](https://zhuanlan.zhihu.com/p/62177097)
-- [Chromium调试技巧](https://www.frontendwingman.com/Chromium/)
+- [Chromium 高阶调试指南](https://zhuanlan.zhihu.com/p/62177097)
+- [Chromium 调试技巧](https://www.frontendwingman.com/Chromium/)

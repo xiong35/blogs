@@ -1,9 +1,10 @@
-
 # go 自定义 package 的用法
+
+> 关键词: golang, 工具记录
 
 ## mod
 
-首先执行```go mod init your-name```, 创建一个 mod 文件
+首先执行`go mod init your-name`, 创建一个 mod 文件
 
 ## 目录结构
 

@@ -1,5 +1,6 @@
-
 # js 文件类型转换
+
+> 关键词: JavaScript, 工具记录
 
 ## 实现的转换一览
 
@@ -8,9 +9,7 @@
 ## File -> DataUrl
 
 ```ts
-async function file2DataUrl(
-  file: File
-): Promise<string | ArrayBuffer> {
+async function file2DataUrl(file: File): Promise<string | ArrayBuffer> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(reader.result);
@@ -29,9 +28,7 @@ async function file2Image(file: File): Promise<HTMLImageElement> {
 
   if (
     window.navigator &&
-    /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(
-      window.navigator.userAgent
-    )
+    /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(window.navigator.userAgent)
   ) {
     // 修复IOS上webkit内核浏览器抛出错误 `The operation is insecure` 问题
     image.crossOrigin = "anonymous";

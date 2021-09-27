@@ -1,10 +1,10 @@
+# 《css 世界》读书笔记
 
-# 《css世界》读书笔记
+> 关键词: CSS, 读书笔记
 
 ## 宽高尺寸
 
 `width, height`属性默认作用在`content-box`上
-
 
 ### display: block
 
@@ -16,7 +16,7 @@
 
 上文的"一般": 当包裹块宽度小于*首选最小宽度*时, 内联元素宽度以最小宽度为准
 
-*首选最小宽度*: 中文一个字的宽度 / 英文最长单词宽度(以空格或连字符分割) / 替换元素本身的宽度
+_首选最小宽度_: 中文一个字的宽度 / 英文最长单词宽度(以空格或连字符分割) / 替换元素本身的宽度
 
 > 浮动元素和绝对定位也都有包裹性
 
@@ -38,18 +38,18 @@
 1. img 如果只设置 width, height 会根据比例自动计算
 2. 替换元素设置`display: block`不会让元素有流动性
 3. 如果 img 没有 src 属性, 不同浏览器会做出不同解释, 导致大小表现统一. 可以设置`display: inline-block`和 width 属性来统一指定
-4. 替换元素的**固有尺寸无法修改, 看起来被修改了只是因为有默认的`object-fit: fill`属性
+4. 替换元素的\*\*固有尺寸无法修改, 看起来被修改了只是因为有默认的`object-fit: fill`属性
 5. `object-fit: contain`属性+定宽高 可以实现图片自适应居中效果
 6. img 在没有 src 属性时表现为**非替换元素**, 可以使用`::before, ::after`等伪元素:
-   
+
    ```css
    /* 更好看的 alt 显示 */
    img::after {
-       content: attr(alt);
-       position: absolute;
-       bottom: 0;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.5);
+     content: attr(alt);
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     background-color: rgba(0, 0, 0, 0.5);
    }
    ```
 
@@ -61,17 +61,17 @@
 1. `counter-reset: NAME INIT-NUM [NAME INIT...]`: 初始化一个计数器, INIT-NUM 最好是自然数
 2. `counter-increment: NAME [VAL]`, 改变计数器的值, VAL 默认为 1, 支持负数
 3. `content: counter(NAME, STYLE) 'foo'`: 利用 content 显示 计数器的值, 这里的 counter **仅有**显示值的作用. 支持字符串拼接, 用空格分隔
-4. **`counters`**的用法: (详见[书上的demo](https://demo.cssworld.cn/4/1-18.php)和[知乎回答](https://zhuanlan.zhihu.com/p/61688767))
+4. **`counters`**的用法: (详见[书上的 demo](https://demo.cssworld.cn/4/1-18.php)和[知乎回答](https://zhuanlan.zhihu.com/p/61688767))
 
-    ```css
-    ol {
-        counter-reset: ol-list;
-    }
-    li:before {
-        counter-increment: ol-list;
-        content: counters(ol-list, "-" [, STYLE]);
-    }
-    ```
+   ```css
+   ol {
+     counter-reset: ol-list;
+   }
+   li:before {
+     counter-increment: ol-list;
+     content: counters(ol-list, "-" [, STYLE]);
+   }
+   ```
 
 ## margin
 
@@ -85,7 +85,7 @@
 情况有以下几种:
 
 1. 兄弟元素间
-2. 父元素和第一个/最后一个子元素8
+2. 父元素和第一个/最后一个子元素 8
 3. 空元素的上下 margin
 
 > 可通过`overflow: hidden`或者设置来阻止合并
@@ -94,15 +94,15 @@
 
 > 触发条件: 假设去掉对应方向的宽/高, 元素有对应方向的自动填充特性
 
-如果一边是定值, 另一边是 auto, 则 auto **自动填充**剩余空间(tip: 由于 maigin 默认是0, 可用这个特性实现左/右对齐)  
+如果一边是定值, 另一边是 auto, 则 auto **自动填充**剩余空间(tip: 由于 maigin 默认是 0, 可用这个特性实现左/右对齐)  
 如果两边都是 auto, 则平分剩余空间
 
-### margin的tips
+### margin 的 tips
 
 1. **内联非替换元素**的垂直 margin 无效
 2. **内联替换元素**的垂直 margin 不会合并
-3. *table-cell, table-row* 的 margin 无效
-4. *table-caption, table, inline-table, :first-letter* 可设置 margin
+3. _table-cell, table-row_ 的 margin 无效
+4. _table-caption, table, inline-table, :first-letter_ 可设置 margin
 5. 内联特性导致 margin 无效 // TODO, 见 p99, (7)
 
 ## vertical-align
@@ -147,7 +147,7 @@ text-align 会影响幽灵空白节点, 从而影响绝对定位元素的位置
 
 当设置 display 为定位元素时, **z-index 自动生效**, 为 auto, 会天然高于非定位元素
 
-设置 z-index 为负值时, 会向上寻找最近的一个由层叠上下文的(即设置了 z-index的)元素, 并止步于此
+设置 z-index 为负值时, 会向上寻找最近的一个由层叠上下文的(即设置了 z-index 的)元素, 并止步于此
 
 ## 元素显隐
 
@@ -158,8 +158,6 @@ text-align 会影响幽灵空白节点, 从而影响绝对定位元素的位置
 | 能触发事件   | 1       | 0          | 0       |
 | 能阻挡点击   | 1       | 0          | 0       |
 | 支持渐变     | 1       | 0.5        | 0       |
-
-
 
 ## tips
 

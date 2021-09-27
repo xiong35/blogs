@@ -1,15 +1,16 @@
+# 优雅的用原生 js/css 实现图片懒加载
 
-# 优雅的用原生js/css实现图片懒加载
+> 关键词: JavaScript, HTML
 
 ## 懒加载原理
 
-对所有页面中的图片, 先不设置 src 属性, 转而将地址设为`data-src`, 等需要加载时再将 src 属性设置为地址  
+对所有页面中的图片, 先不设置 src 属性, 转而将地址设为`data-src`, 等需要加载时再将 src 属性设置为地址
 
 如何判断何时需要加载: 利用以下三个属性
 
 - `document.documentElement.scrollTop`: 页面滚到窗口上方的距离
 - `document.documentElement.clientHeight`: 窗口高度
-- `<el>.offsetTop`: 某个html元素顶部距离页面顶部的距离
+- `<el>.offsetTop`: 某个 html 元素顶部距离页面顶部的距离
 
 利用`offsetTop-scrollTop-clientHeight > 0`判断图片是否进入页面. 如下图:
 
@@ -131,11 +132,11 @@ function load() {
 }
 ```
 
-每次滚动后设置一个0.1s的定时器, 在此期间不再调用lazyLoad函数, 可以显著降低调用次数, 优化性能
+每次滚动后设置一个 0.1s 的定时器, 在此期间不再调用 lazyLoad 函数, 可以显著降低调用次数, 优化性能
 
 ### 设置预加载, 提升用户体验
 
-将 lazyLoad函数改为:
+将 lazyLoad 函数改为:
 
 ```js
 function lazyLoad(imgs) {
@@ -198,7 +199,7 @@ function lazyLoad(imgs) {
       transition: all 0.5s;
     }
     /* 浮现效果 */
-    img.float-up { 
+    img.float-up {
       opacity: 1;
       transition-delay: 0.3s;
       animation: float 0.8s linear;
@@ -235,7 +236,6 @@ function lazyLoad(imgs) {
     }
     const imgs = document.querySelectorAll(".lazy");
     function load() {
-
       var timmer;
       window.onscroll = () => {
         if (timmer) {
@@ -249,7 +249,7 @@ function lazyLoad(imgs) {
     }
     load();
     /* 在最开始时检测一次图片位置 */
-    lazyLoad(imgs)
+    lazyLoad(imgs);
   </script>
 </html>
 ```

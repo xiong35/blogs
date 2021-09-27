@@ -1,5 +1,6 @@
+# 《你不知道的 js(中卷)》-类型
 
-# 《你不知道的js(中卷)》-类型
+> 关键词: 读书笔记, JavaScript
 
 ## null
 
@@ -8,16 +9,18 @@ var a = null;
 
 typeof a === "object"; // true
 
-(!a && typeof a === "object"); // true. 真正能判断 null 的方法
+!a && typeof a === "object"; // true. 真正能判断 null 的方法
 ```
 
 ## function
 
 ```js
-typeof function a(){ /* .. */ } === "function"; // true
+typeof function a() {
+  /* .. */
+} === "function"; // true
 
-function a(b,c) {
- /* .. */
+function a(b, c) {
+  /* .. */
 }
 
 a.length; // 2, 函数对象的 length 属性是其声明的参数的个数
@@ -30,17 +33,17 @@ a.length; // 2, 函数对象的 length 属性是其声明的参数的个数
 ```js
 // 这样会抛出错误
 if (DEBUG) {
- console.log( "Debugging is starting" );
+  console.log("Debugging is starting");
 }
 
 // 这样是安全的
 if (typeof DEBUG !== "undefined") {
- console.log( "Debugging is starting" );
+  console.log("Debugging is starting");
 }
 
 // 当然也可以这样, 但是只能在浏览器运行
 if (window.DEBUG) {
- // ..
+  // ..
 }
 ```
 
@@ -59,22 +62,24 @@ JavaScript 中字符串是不可变的，而数组是可变的。并且 a[1] 在
 a.join; // undefined
 a.map; // undefined
 
-var c = Array.prototype.join.call( a, "-" );
-var d = Array.prototype.map.call( a, function(v){
+var c = Array.prototype.join.call(a, "-");
+var d = Array.prototype.map
+  .call(a, function (v) {
     return v.toUpperCase() + ".";
-} ).join("");
+  })
+  .join("");
 
 c; // "f-o-o"
 d; // "F.O.O."
 
 // 反转字符串
 var c = a
- // 将a的值转换为字符数组
- .split( "" )
- // 将数组中的字符进行倒转
- .reverse()
- // 将数组中的字符拼接回字符串
- .join( "" );
+  // 将a的值转换为字符数组
+  .split("")
+  // 将数组中的字符进行倒转
+  .reverse()
+  // 将数组中的字符拼接回字符串
+  .join("");
 c; // "oof"
 // 注意对 unicode 等并不适用
 ```
@@ -84,7 +89,7 @@ c; // "oof"
 特别大和特别小的数字默认用指数格式显示，与 `toExponential()` 函数的输出结果相同。例如：
 
 ```js
-var a = 5E10;
+var a = 5e10;
 a; // 50000000000
 a.toExponential(); // "5e+10"
 
@@ -100,18 +105,18 @@ c; // 2e-11
 ```js
 // 保留小数
 var a = 42.59;
-a.toFixed( 0 ); // "43"
-a.toFixed( 1 ); // "42.6"
-a.toFixed( 2 ); // "42.59"
-a.toFixed( 3 ); // "42.590"
+a.toFixed(0); // "43"
+a.toFixed(1); // "42.6"
+a.toFixed(2); // "42.59"
+a.toFixed(3); // "42.590"
 
 var a = 42.59;
 // 保留有效数字
-a.toPrecision( 1 ); // "4e+1"
-a.toPrecision( 2 ); // "43"
-a.toPrecision( 3 ); // "42.6"
-a.toPrecision( 4 ); // "42.59"
-a.toPrecision( 5 ); // "42.590"
+a.toPrecision(1); // "4e+1"
+a.toPrecision(2); // "43"
+a.toPrecision(3); // "42.6"
+a.toPrecision(4); // "42.59"
+a.toPrecision(5); // "42.590"
 ```
 
 ## void
@@ -120,22 +125,22 @@ void 并不改变表达式的结果，只是让表达式不返回值
 
 ```js
 var a = 42;
-console.log( void a, a ); // undefined 42
+console.log(void a, a); // undefined 42
 
 // 实际中的用处
 function doSomething() {
-    // 注： APP.ready 由程序自己定义
-    if (!APP.ready) {
+  // 注： APP.ready 由程序自己定义
+  if (!APP.ready) {
     // 稍后再试
-    return void setTimeout( doSomething, 100 );
-    }
-    var result;
-    // 其他
-    return result;
+    return void setTimeout(doSomething, 100);
+  }
+  var result;
+  // 其他
+  return result;
 }
 // 现在可以了吗？
 if (doSomething()) {
-    // 立即执行下一个任务
+  // 立即执行下一个任务
 }
 ```
 
@@ -144,13 +149,13 @@ if (doSomething()) {
 ```js
 typeof NaN === "number"; // true
 
-NaN == NaN // false
-NaN != NaN // true, 可以用这个性质判断是不是nan
+NaN == NaN; // false
+NaN != NaN; // true, 可以用这个性质判断是不是nan
 
-isNaN(NaN) // true
-isNaN("foo") // true(Mozilla) / false(Chrome), 取决于实现(显然存在bug)
+isNaN(NaN); // true
+isNaN("foo"); // true(Mozilla) / false(Chrome), 取决于实现(显然存在bug)
 
-Number.isNaN(NaN) // true
+Number.isNaN(NaN); // true
 ```
 
 ## 值和引用
@@ -163,14 +168,14 @@ Number.isNaN(NaN) // true
 所有 typeof 返回值为 "object" 的对象（如数组）都包含一个内部属性 [[Class]]（我们可以把它看作一个内部的分类，而非传统的面向对象意义上的类）。这个属性无法直接访问，一般通过 `Object.prototype.toString(..)` 来查看
 
 ```js
-Object.prototype.toString.call( [1,2,3] );
+Object.prototype.toString.call([1, 2, 3]);
 // "[object Array]"
-Object.prototype.toString.call( /regex-literal/i );
+Object.prototype.toString.call(/regex-literal/i);
 // "[object RegExp]"
 
-Object.prototype.toString.call( null );
+Object.prototype.toString.call(null);
 // "[object Null]"
-Object.prototype.toString.call( undefined );
+Object.prototype.toString.call(undefined);
 // "[object Undefined]"
 ```
 

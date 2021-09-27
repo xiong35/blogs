@@ -1,27 +1,28 @@
-
 # js 类中函数 this 指向问题
+
+> 关键词: JavaScript
 
 ```js
 class Foo {
-    bar() {
-        console.log(this);
-    }
+  bar() {
+    console.log(this);
+  }
 
-    baz = () => {
-        console.log(this);
-    }
+  baz = () => {
+    console.log(this);
+  };
 }
 
-var foo = new Foo()
+var foo = new Foo();
 
-foo.bar()
-foo.baz()
+foo.bar();
+foo.baz();
 
-let foobar = foo.bar
-let foobaz = foo.baz
+let foobar = foo.bar;
+let foobaz = foo.baz;
 
-foobar()
-foobaz()
+foobar();
+foobaz();
 ```
 
 结果为
@@ -37,14 +38,14 @@ Foo { baz: [Function: baz] }
 
 ```js
 class Foo {
+  constructor() {
+    this.baz = this.baz.bind(this);
+  }
 
-    constructor () {
-        this.baz = this.baz.bind(this)
-    }
-
-    baz () { // 注意这里不是箭头函数
-        console.log(this);
-    }
+  baz() {
+    // 注意这里不是箭头函数
+    console.log(this);
+  }
 }
 ```
 

@@ -1,5 +1,6 @@
+# 初探 vue render 函数
 
-# 初探 vue render函数
+> 关键词: Vue
 
 有一个需求是在 vue 中动态选择要展示的组件, 同时在点击时隐藏整个组件,
 使用 template 很难动态选择组件, 而一开始用 render 函数也不知道怎么使用`v-show`

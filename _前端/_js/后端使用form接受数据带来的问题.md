@@ -1,5 +1,6 @@
+# 后端使用 form 接受数据带来的问题
 
-# 后端使用form接受数据带来的问题
+> 关键词: 后端杂记, 前端杂记
 
 在某项目中后端使用了`contentType = "application/x-www-form-urlencoded"`而非`"application/json"`来获取数据, 带来了以下问题:
 
@@ -11,15 +12,11 @@
 1. 引入 **qs** 模块, 生成 form 格式请求
 
 ```js
-import qs from "qs";    // 下载并引入这个序列化模块
+import qs from "qs"; // 下载并引入这个序列化模块
 
-export async function POST(
-  url,
-  data,
-  contentType = "application/json"
-) {
+export async function POST(url, data, contentType = "application/json") {
   if (contentType == "application/x-www-form-urlencoded") {
-    data = qs.stringify(data);  // 进行序列化
+    data = qs.stringify(data); // 进行序列化
   }
 
   let res = await request({

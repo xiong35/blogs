@@ -1,24 +1,25 @@
+# 《你不知道的 js(中卷)》-异步
 
-# 《你不知道的js(中卷)》-异步
+> 关键词: 读书笔记, JavaScript
 
 ## 代码块
 
 由于 js 单线程的特点, 程序段中的**代码块具有原子性**
 
 ```js
-var a = 20; 
+var a = 20;
 
-function foo() { 
-    a *= 2;
-    console.log(a)
-} 
-function bar() { 
-    a += 1;
-    console.log(a)
-} 
+function foo() {
+  a *= 2;
+  console.log(a);
+}
+function bar() {
+  a += 1;
+  console.log(a);
+}
 // ajax(..)是某个库中提供的某个Ajax函数
-ajax( "http://some.url.1", foo ); 
-ajax( "http://some.url.2", bar );
+ajax("http://some.url.1", foo);
+ajax("http://some.url.2", bar);
 ```
 
 由于 `foo()` 不会被 `bar()` 中断，`bar()` 也不会被 `foo()` 中断，所以这个程序只有两个可能的输出，取决于这两个函数哪个先运行
@@ -27,36 +28,35 @@ ajax( "http://some.url.2", bar );
 
 ## promise
 
-### 如何保证promise会有结果
+### 如何保证 promise 会有结果
 
 ```js
 // 用于超时一个Promise的工具
-function timeoutPromise(delay) { 
-    return new Promise( function(resolve,reject){ 
-        setTimeout( function(){ 
-            reject( "Timeout!" ); 
-        }, delay ); 
-    } ); 
-} 
+function timeoutPromise(delay) {
+  return new Promise(function (resolve, reject) {
+    setTimeout(function () {
+      reject("Timeout!");
+    }, delay);
+  });
+}
 // 设置foo()超时
-Promise.race( [ 
-    foo(), // 试着开始foo() 
-    timeoutPromise( 3000 ) // 给它3秒钟
-]) 
-.then( 
-    function(){ 
-        // foo(..)及时完成！
-    }, 
-    function(err){ 
-        // 或者foo()被拒绝，或者只是没能按时完成
-        // 查看err来了解是哪种情况
-    } 
+Promise.race([
+  foo(), // 试着开始foo()
+  timeoutPromise(3000), // 给它3秒钟
+]).then(
+  function () {
+    // foo(..)及时完成！
+  },
+  function (err) {
+    // 或者foo()被拒绝，或者只是没能按时完成
+    // 查看err来了解是哪种情况
+  }
 );
 ```
 
-### resolve的参数问题
+### resolve 的参数问题
 
-> 内部判断是否为 promise 的方法大致为: 是对象+有then函数
+> 内部判断是否为 promise 的方法大致为: 是对象+有 then 函数
 
 如果向 `Promise.resolve(..)` 传递一个非 Promise、非 thenable 的立即值，就会得到一个用这个值填充的 promise
 
@@ -65,22 +65,21 @@ Promise.race( [
 如果向 `Promise.resolve(..)` 传递了一个非 Promise 的 thenable 值，前者就会试图展开这个值，而且展开过程会持续到提取出一个具体的非类 Promise 的最终值
 
 ```js
-var p = { 
-    then: function(cb,errcb) { 
-        cb( 42 ); 
-        errcb( "evil laugh" ); 
-    } 
+var p = {
+  then: function (cb, errcb) {
+    cb(42);
+    errcb("evil laugh");
+  },
 };
 
-p 
-.then( 
-    function fulfilled(val){ 
-        console.log( val ); // 42 
-    }, 
-    function rejected(err){ 
-        // 啊，不应该运行！
-        console.log( err ); // 邪恶的笑
-    } 
+p.then(
+  function fulfilled(val) {
+    console.log(val); // 42
+  },
+  function rejected(err) {
+    // 啊，不应该运行！
+    console.log(err); // 邪恶的笑
+  }
 );
 ```
 
@@ -88,16 +87,14 @@ p
 
 ```js
 // 不要只是这么做：
-foo( 42 ) 
-.then( function(v){ 
-    console.log( v ); 
-}); 
+foo(42).then(function (v) {
+  console.log(v);
+});
 
 // 而要这么做：
-Promise.resolve( foo( 42 ) ) 
-.then( function(v){ 
-    console.log( v ); 
-} );
+Promise.resolve(foo(42)).then(function (v) {
+  console.log(v);
+});
 ```
 
 ## boss 战
@@ -106,28 +103,28 @@ Promise.resolve( foo( 42 ) )
 
 ```js
 async function async1() {
-    console.log("async1 start");
-    await async2();
-    console.log("async1 end");
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
 }
 
 async function async2() {
-    console.log("async2");
+  console.log("async2");
 }
 
 console.log("script start");
 
-setTimeout(function() {
-    console.log("setTimeout");
+setTimeout(function () {
+  console.log("setTimeout");
 }, 0);
 
 async1();
 
-new Promise(function(resolve) {
-    console.log("promise1");
-    resolve();
-}).then(function() {
-    console.log("promise2");
+new Promise(function (resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function () {
+  console.log("promise2");
 });
 
 console.log("script end");

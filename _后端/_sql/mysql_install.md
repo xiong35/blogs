@@ -1,13 +1,14 @@
+# Windows10 上的 MySQL-8 安装笔记
 
-# Windows10上的MySQL-8安装笔记
+> 关键词: sql, 后端杂记, 工具记录
 
-## 下载zip文件
+## 下载 zip 文件
 
 [下载链接](https://dev.mysql.com/downloads/mysql/)
 
-将文件解压到安装目录下, 我的目录是C:\MyDownloads\mysql\mysql-8.0.19-winx64
+将文件解压到安装目录下, 我的目录是 C:\MyDownloads\mysql\mysql-8.0.19-winx64
 
-## 配置init
+## 配置 init
 
 在上述目录下创建 my.ini 配置文件，编辑 my.ini 配置以下基本信息:
 
@@ -30,7 +31,7 @@
 
 ## 启动 MySQL 数据库
 
-打开`C:\Windows\System32`文件夹(64位32位电脑一般都是这个文件夹), 找到cmd.exe, 右键, 选择"以管理员身份运行"(一定要以管理员身份进!)
+打开`C:\Windows\System32`文件夹(64 位 32 位电脑一般都是这个文件夹), 找到 cmd.exe, 右键, 选择"以管理员身份运行"(一定要以管理员身份进!)
 
 切换目录:
 
@@ -40,7 +41,7 @@
 
     mysqld --initialize --console
 
-此时可能会报错:[找不到vcruntime140_1.dll]  
+此时可能会报错:[找不到 vcruntime140_1.dll]  
 解决方案:参考[这篇文章](https://blog.csdn.net/qq_42365534/article/details/102847013)
 
 输出应该如:
@@ -49,9 +50,9 @@
     2018-04-20T02:35:05.464644Z 5 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: <PWCY5ws&hjQ
     ...
 
-其中```<PWCY5ws&hjQ```就是初始密码, 拿小本本记下来  
-一共12位, 可能出现'<'啊, '&'啊之类的奇怪字符  
-下一章讲述如何修改  
+其中`<PWCY5ws&hjQ`就是初始密码, 拿小本本记下来  
+一共 12 位, 可能出现'<'啊, '&'啊之类的奇怪字符  
+下一章讲述如何修改
 
 安装
 
@@ -65,7 +66,7 @@
 
     net start mysql
 
-*关闭
+\*关闭
 
     net stop mysql
 
@@ -97,4 +98,4 @@
 
     mysql>ALTER USER 'root'@'localhost' IDENTIFIED WITH MYSQL_NATIVE_PASSWORD BY '新密码';
 
-其中的单引号都是必须的, 只用自己的密码替换[新密码]几个字就行了  
+其中的单引号都是必须的, 只用自己的密码替换[新密码]几个字就行了

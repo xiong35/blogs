@@ -1,9 +1,10 @@
-
 # [科普] node.js 编写后端代码
+
+> 关键词: Node.js, 指北
 
 ## node.js 是什么
 
-这就得从 js 的起源讲起...众所周知, js 是一门用来操作网页的语言. js 的设计目标就是让网页能动起来. 既然要操纵网页, 那就必须**有**网页, 所所以在很长一段时间里 js 都必须在浏览器中运行, 每个浏览器都配有 js 的解释器以执行 js 代码, 这也让 js 成为了世界上装机量最大的语言之一(小灵通都能上网, 不会有电子设备不能用浏览器吧😅)
+这就得从 js 的起源讲起...众所周知, js 是一门用来操作网页的语言. js 的设计目标就是让网页能动起来. 既然要操纵网页, 那就必须**有**网页, 所所以在很长一段时间里 js 都必须在浏览器中运行, 每个浏览器都配有 js 的解释器以执行 js 代码, 这也让 js 成为了世界上装机量最大的语言之一(小灵通都能上网, 不会有电子设备不能用浏览器吧 😅)
 
 在**前端**这个概念崛起前, 没有*前端工程师*这种说法, 网页都是通过后端用一种不优雅的方式编写的(后续会展示), 而当**前端**概念崛起后, 涌现了一大批前端工程师. 但想制作一个网页, 必须既有前端又有后端, 为了~~压榨员工~~节省人力成本, 出现了对全栈工程师的需求.
 
@@ -21,19 +22,18 @@
 
 **服务器就是一台电脑**, 只是不能打游戏, 不能看视频, 不能快乐 happy, 它的唯一目的就是**提供服务**, 如让大家可以访问到网页, 可以进行较强的计算能力来训练 ai 等
 
-服务器(其实任何电脑都有)有两个重要的属性: ip地址 和 端口号
+服务器(其实任何电脑都有)有两个重要的属性: ip 地址 和 端口号
 
-通过 *ip地址* 可以唯一确定一台服务器, 通过 *端口号* 可以唯一确定服务器上运行的一个服务.
+通过 _ip 地址_ 可以唯一确定一台服务器, 通过 _端口号_ 可以唯一确定服务器上运行的一个服务.
 
-> **IP地址**（英语：IP Address，全称Internet Protocol Address），又译为网际协议地址、互联网协议地址。当设备连接网络，设备将被分配一个IP地址，用作标识。通过IP地址，设备间可以互相通讯，如果没有IP地址，我们将无法知道哪个设备是发送方，无法知道哪个是接收方。IP地址有两个主要功能：标识设备或网络 和 寻址（英语：location addressing）。  
-> 常见的IP地址分为 IPv4 与 IPv6 两大类，IP地址由一串数字组成。IPv4 由十进制数字组成，并以点分隔，如：`172.16.254.1`；IPv6 由十六进制数字组成，以冒号分割，如：`2001:db8:0:1234:0:567:8:1`。
+> **IP 地址**（英语：IP Address，全称 Internet Protocol Address），又译为网际协议地址、互联网协议地址。当设备连接网络，设备将被分配一个 IP 地址，用作标识。通过 IP 地址，设备间可以互相通讯，如果没有 IP 地址，我们将无法知道哪个设备是发送方，无法知道哪个是接收方。IP 地址有两个主要功能：标识设备或网络 和 寻址（英语：location addressing）。  
+> 常见的 IP 地址分为 IPv4 与 IPv6 两大类，IP 地址由一串数字组成。IPv4 由十进制数字组成，并以点分隔，如：`172.16.254.1`；IPv6 由十六进制数字组成，以冒号分割，如：`2001:db8:0:1234:0:567:8:1`。
 
+> **端口**是指逻辑意义上用于区分服务的端口，比如用于浏览网页服务的 80 端口，用于 FTP 服务的 21 端口等。如 TCP/IP 协议中的服务端口，通过不同的逻辑端口来区分不同的服务。一个 IP 地址的端口通过 16bit 进行编号，最多可以有 65536 个端口 。端口是通过端口号来标记的，端口号只有整数，范围是从 0 到 65535。
 
-> **端口**是指逻辑意义上用于区分服务的端口，比如用于浏览网页服务的80端口，用于FTP服务的21端口等。如TCP/IP协议中的服务端口，通过不同的逻辑端口来区分不同的服务。一个IP地址的端口通过16bit进行编号，最多可以有65536个端口 。端口是通过端口号来标记的，端口号只有整数，范围是从0 到 65535。
+举个比方, 你要找你的快递(_你所需要的具体服务_), 需要通过名字(_ip_)先找到他的快递站点, 菜鸟 or 中通 or 韵达(_找到对应的服务器_), 再根据取件码(_端口号_)找到你的快递(_具体的服务_)
 
-举个比方, 你要找你的快递(*你所需要的具体服务*), 需要通过名字(*ip*)先找到他的快递站点, 菜鸟 or 中通 or 韵达(*找到对应的服务器*), 再根据取件码(*端口号*)找到你的快递(*具体的服务*)
-
-端口号的主要作用是表示一台计算机中的特定进程所提供的服务。网络中的计算机是通过IP地址来代表其身份的，它只能表示某台特定的计算机，但是一台计算机上可以同时提供很多个服务，如数据库服务、FTP服务、Web服务等，我们就通过端口号来区别相同计算机所提供的这些不同的服务，如常见的端口号21表示的是FTP服务，端口号23表示的是Telnet服务端口号25指的是SMTP服务等。端口号一般习惯为4位整数，在同一台计算机上端口号不能重复，否则，就会产生端口号冲突这样的例外
+端口号的主要作用是表示一台计算机中的特定进程所提供的服务。网络中的计算机是通过 IP 地址来代表其身份的，它只能表示某台特定的计算机，但是一台计算机上可以同时提供很多个服务，如数据库服务、FTP 服务、Web 服务等，我们就通过端口号来区别相同计算机所提供的这些不同的服务，如常见的端口号 21 表示的是 FTP 服务，端口号 23 表示的是 Telnet 服务端口号 25 指的是 SMTP 服务等。端口号一般习惯为 4 位整数，在同一台计算机上端口号不能重复，否则，就会产生端口号冲突这样的例外
 
 ok, 说了这么多, 我们来实操一下
 
@@ -65,13 +65,7 @@ const http = require("http");
 const url = require("url");
 
 var server = http.createServer(function (req, res) {
-  console.log(
-    new Date().toISOString(),
-    "\t",
-    req.method,
-    "\t",
-    req.url
-  );
+  console.log(new Date().toISOString(), "\t", req.method, "\t", req.url);
 
   let urlPath = url.parse(req.url).pathname;
   res.writeHead(200);
@@ -88,17 +82,17 @@ console.log(`Server running at port: 7777`);
 2. 返回 html!
 
 ```js
-  res.end(`
+res.end(`
 <h1>WOW</h1>
 <p>IT'S HTML !!!</p>
 `);
 ```
 
 3.  返回一个完整的网页!!!!
-  
+
 ```js
-  res.setHeader("Content-Type", "text/html;charset=utf-8");
-  res.end(`
+res.setHeader("Content-Type", "text/html;charset=utf-8");
+res.end(`
 <style>
   body {
     background-color: pink;
@@ -136,7 +130,7 @@ console.log(`Server running at port: 7777`);
   };
 </script>
 `);
-``` 
+```
 
 ### 这么写太要命了, 有没有牛一点的写法!
 
@@ -155,11 +149,11 @@ vim index.js
 ```
 
 ```js
-const Koa = require('koa');
+const Koa = require("koa");
 const app = new Koa();
 
-app.use(async ctx => {
-  ctx.body = '<h1>Hello World, 你好世界</h1>';
+app.use(async (ctx) => {
+  ctx.body = "<h1>Hello World, 你好世界</h1>";
 });
 
 app.listen(7777);
@@ -172,49 +166,49 @@ console.log("server running at 7777");
 
 ```js
 const news = [
-  { 
-    title: "震惊! 天翼3g居然这么快!", 
-    time: "2008-7-12"
+  {
+    title: "震惊! 天翼3g居然这么快!",
+    time: "2008-7-12",
   },
-  { 
-    title: "震惊! 华中科技大学等来了小熊!", 
-    time: "2019-9-1"
+  {
+    title: "震惊! 华中科技大学等来了小熊!",
+    time: "2019-9-1",
   },
-  { 
-    title: "震惊! 知名互联网团队内的椅子居然全是坏的!", 
-    time: "2021-7-13"
+  {
+    title: "震惊! 知名互联网团队内的椅子居然全是坏的!",
+    time: "2021-7-13",
   },
-]
+];
 ```
 
 直觉上来看, 我们可以这么写:
 
 ```js
-const Koa = require('koa');
-const cors = require('@koa/cors');
- 
+const Koa = require("koa");
+const cors = require("@koa/cors");
+
 const app = new Koa();
-app.use(cors({origin : "*"}));
-app.use(async ctx => {
+app.use(cors({ origin: "*" }));
+app.use(async (ctx) => {
   const news = [
-    { 
-      title: "震惊! 天翼3g居然这么快!", 
-      time: "2008-7-12"
+    {
+      title: "震惊! 天翼3g居然这么快!",
+      time: "2008-7-12",
     },
-    { 
-      title: "震惊! 华中科技大学等来了小熊!", 
-      time: "2019-9-1"
+    {
+      title: "震惊! 华中科技大学等来了小熊!",
+      time: "2019-9-1",
     },
-    { 
-      title: "震惊! 知名互联网团队内的椅子居然全是坏的!", 
-      time: "2021-7-13"
+    {
+      title: "震惊! 知名互联网团队内的椅子居然全是坏的!",
+      time: "2021-7-13",
     },
-  ]
-  let newsStr = ""
+  ];
+  let newsStr = "";
   for (let i = 0; i < news.length; i++) {
-    newsStr += `<li>${news[i].title}---${news[i].time}</li>`
+    newsStr += `<li>${news[i].title}---${news[i].time}</li>`;
   }
-  const newsBody = `<ul>${newsStr}</ul>`
+  const newsBody = `<ul>${newsStr}</ul>`;
   ctx.body = newsBody;
 });
 
@@ -229,24 +223,24 @@ console.log("server running at 7777");
 后端:
 
 ```js
-const Koa = require('koa');
+const Koa = require("koa");
 const app = new Koa();
 
-app.use(async ctx => {
+app.use(async (ctx) => {
   const news = [
     {
-      title: "震惊! 天翼3g居然这么快!", 
-      time: "2008-7-12"
+      title: "震惊! 天翼3g居然这么快!",
+      time: "2008-7-12",
     },
-    { 
-      title: "震惊! 华中科技大学等来了小熊!", 
-      time: "2019-9-1"
+    {
+      title: "震惊! 华中科技大学等来了小熊!",
+      time: "2019-9-1",
     },
-    { 
-      title: "震惊! 知名互联网团队内的椅子居然全是坏的!", 
-      time: "2021-7-13"
+    {
+      title: "震惊! 知名互联网团队内的椅子居然全是坏的!",
+      time: "2021-7-13",
     },
-  ]
+  ];
   ctx.body = news;
 });
 

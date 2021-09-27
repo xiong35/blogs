@@ -1,23 +1,26 @@
+# webpack 学习笔记(性能优化)
 
-# webpack学习笔记(性能优化)
+> 关键词: webpack
 
 ## HMR
 
 简单做法: `devServer`中加入`hot: true`的选项
 
-- css: 可以, style-loader 内部实现了热加载(所以开发环境还是用style-loader好)
+- css: 可以, style-loader 内部实现了热加载(所以开发环境还是用 style-loader 好)
 - js: 默认没有 HMR
 - html: 默认没有 HMR, 也不能热更新
   - 解决热更新的方法: `entry: ["./xx.js", "./xxx.html"]`
 
-解决方案: 在js里加入这段话:
+解决方案: 在 js 里加入这段话:
 
 ```js
-if (mudule.hot) { // 如果开启了热加载
-  module.hot.accept("./foo.js", () => {  //监听foo.js的变化, 如果有变化就执行回调
+if (mudule.hot) {
+  // 如果开启了热加载
+  module.hot.accept("./foo.js", () => {
+    //监听foo.js的变化, 如果有变化就执行回调
     // 可以执行 foo 的关键代码, 用于更新模块
     inportantFuncFromFoo();
-  })
+  });
 }
 ```
 
@@ -45,8 +48,10 @@ if (mudule.hot) { // 如果开启了热加载
 ```js
 module: {
   rules: [
-    {}, {}, {}//...
-  ]
+    {},
+    {},
+    {}, //...
+  ];
 }
 ```
 
@@ -55,10 +60,13 @@ module: {
 ```js
 module: {
   rules: [
-    oneOf: [     // 注意这里
-      {}, {}, {} //...
-    ]
-  ]
+    (oneOf: [
+      // 注意这里
+      {},
+      {},
+      {} //...
+    ]),
+  ];
 }
 ```
 
@@ -68,9 +76,9 @@ module: {
 
 ## 缓存
 
-### babel缓存
+### babel 缓存
 
-在 loader 的 option 里添加`cacheDirectory: true`即可 
+在 loader 的 option 里添加`cacheDirectory: true`即可
 
 ### 浏览器缓存
 
@@ -78,7 +86,7 @@ module: {
 
 - 普通 hash: 一个文件修改, 每个文件的缓存都失效
 - chunkhash: 只要 chunk 没变, hash 就不变
-- contenthash: 根据文件内容生成hash
+- contenthash: 根据文件内容生成 hash
 
 ## TreeShaking
 
@@ -111,12 +119,12 @@ optimization: {
 }
 ```
 
-可实现将node_modules引入的模块打包到一起, 解决上述问题
+可实现将 node_modules 引入的模块打包到一起, 解决上述问题
 
 终极方案: 除了**使用进阶方法**, 并且**不使用对象语法**之外, 将 js 调整为以下内容可以实现自定义内容的分割
 
 ```js
-const fooPromise = import(/* webpackChunckName: 'foo' */"./foo");
+const fooPromise = import(/* webpackChunckName: 'foo' */ "./foo");
 // 动态导入语法返回一个promise, onFulfilled 参数为模块本身
 // 注释部分为此模块指定名字
 
@@ -137,18 +145,18 @@ fooPromise.then((foo) => {
 
 ```js
 // webpack.config.js
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-  
+const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+
 module.exports = {
   /* ... */
   plugins: [
     /* ... */
     new WorkboxWebpackPlugi.GenerateSW({
       clientClaim: true,
-      skipWaiting: true
+      skipWaiting: true,
     }),
-  ]
-}
+  ],
+};
 ```
 
 ```js
@@ -158,12 +166,12 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("/service-worker.js")
       .then(() => {
-        console.log("Service worker started")
+        console.log("Service worker started");
       })
       .catch(() => {
         /* ... */
-      })
-  })
+      });
+  });
 }
 ```
 
@@ -201,7 +209,7 @@ if ("serviceWorker" in navigator) {
 
 ## externals
 
-对于外部包, 可以用这个选项避免 npm 帮你打包, 你可以转而使用 cdn 等 
+对于外部包, 可以用这个选项避免 npm 帮你打包, 你可以转而使用 cdn 等
 
 ```js
 // webpack.config.js
@@ -209,8 +217,8 @@ module.exports = {
   externals: {
     // 忽略库名: npm 包名
     jquery: "jQuery",
-  }
-}
+  },
+};
 ```
 
 ## DLL
@@ -223,7 +231,7 @@ module.exports = {
 // webpack.dll.js
 // 指定单独打包哪些库, 生成打包好的js和manifest文件, 只需要运行一次
 // 使用 `webpack --config webpack.dll.js` 来指定使用这个配置文件
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = {
   entry: {
@@ -232,26 +240,26 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].js',
-    path: "./dll/js/",            // 打包到专门的dll目录下
-    library: "[name]_[hash:10]",  // 打包的库向外暴露(module.export)的名字
+    filename: "[name].js",
+    path: "./dll/js/", // 打包到专门的dll目录下
+    library: "[name]_[hash:10]", // 打包的库向外暴露(module.export)的名字
   },
 
   plugins: [
     // 生成映射文件, 打包生成build好了的第三方库
     new webpack.DllPlugin({
-      name: "[name]_[hash:10]",     // 映射库暴露的内容名称
+      name: "[name]_[hash:10]", // 映射库暴露的内容名称
       path: resolve(__dirname, "dll/manifest.json"),
-    })
+    }),
   ],
 
-  mode: "production"
-}
+  mode: "production",
+};
 ```
 
 ```js
 // webpack.config.js
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 const AddAssetsHtmlPlugin = require("add-assets-html-plugin");
 
@@ -259,7 +267,7 @@ module.exports = {
   entry: "./src/index.js",
 
   output: {
-    filename: 'build.js',
+    filename: "build.js",
     path: "./dist/js/",
   },
 
@@ -271,7 +279,7 @@ module.exports = {
     // 将某个文件打包出去, 并在html中使用已经打包好的文件(需要单独指明引入谁)
     new AddAssetsHtmlPlugin({
       filePath: resolve(__dirname, "dll/jquery.js"),
-    })
-  ]
-}
+    }),
+  ],
+};
 ```

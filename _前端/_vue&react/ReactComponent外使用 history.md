@@ -1,5 +1,6 @@
+# ReactComponent 外使用 history
 
-# ReactComponent外使用 history
+> 关键词: React
 
 react router 可以用`withRouter`对组件进行包装, 在他的 props 里注入 history 对象, 从而控制网页路径, 但是还是无法在 ReactComponent 外使用 history 对象(如在 axios 中使用统一的跳转回调)
 
@@ -44,11 +45,8 @@ ReactDOM.render(
 import history from "./history";
 
 export async function login(line) {
-  const res = await showDialog(<LoginContent line={line} />, [
-    "取消",
-    "登录",
-  ]);
+  const res = await showDialog(<LoginContent line={line} />, ["取消", "登录"]);
   if (res !== "登录") return;
-  history.push("/login"); // 这里, 直接使用 history 对象进行界面跳转 
+  history.push("/login"); // 这里, 直接使用 history 对象进行界面跳转
 }
 ```

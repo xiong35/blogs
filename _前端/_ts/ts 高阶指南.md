@@ -1,5 +1,6 @@
-
 # ts 高阶指南
+
+> 关键词: TypeScript
 
 ## & |
 
@@ -15,7 +16,7 @@ type B = {
 
 type AORB = B | A;
 
-var a_or_b: AORB = { a: () => {}, b: [], c: 2 }; 
+var a_or_b: AORB = { a: () => {}, b: [], c: 2 };
 // c 为"2"也可, 缺少a,b之一也可, 但 c 不能缺少
 // 即 a_or_b 是 A 或 B 之一, 或两者都是
 
@@ -40,15 +41,15 @@ var a_and_b: ANB = { a: () => {}, b: [], c: "2" };
 
 ```ts
 function isFish(pet: Fish | Bird): pet is Fish {
-    return (<Fish>pet).swim !== undefined;
+  return (<Fish>pet).swim !== undefined;
 }
 
 // 'swim' 和 'fly' 调用都没有问题了
 
 if (isFish(pet)) {
-    pet.swim();
+  pet.swim();
 } else {
-    pet.fly();
+  pet.fly();
 }
 ```
 
@@ -58,16 +59,16 @@ if (isFish(pet)) {
 
 ```ts
 function get<T extends object, K extends keyof T>(o: T, name: K): T[K] {
-  return o[name]
+  return o[name];
 }
 ```
 
 也可用固定语法进行迭代
 
 ```ts
-type Record<K extends keyof any,T> = {
-  [key in K]: T
-}
+type Record<K extends keyof any, T> = {
+  [key in K]: T;
+};
 ```
 
 ## `T extends U? X: Y`
@@ -79,11 +80,17 @@ type Record<K extends keyof any,T> = {
 可进行自动类型推断
 
 ```ts
-type Parameters<T extends (...args: any) => any> =
-     T extends (...args: infer P) => any ? P : never;
+type Parameters<T extends (...args: any) => any> = T extends (
+  ...args: infer P
+) => any
+  ? P
+  : never;
 
-type ReturnType<T extends (...args: any) => any> =
-    T extends (...args: any) => infer R ? R : any;
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => infer R
+  ? R
+  : any;
 ```
 
 ## typeof
@@ -99,35 +106,35 @@ type ReturnType<T extends (...args: any) => any> =
  * Make all properties in T optional
  */
 type Partial<T> = {
-    [P in keyof T]?: T[P];
+  [P in keyof T]?: T[P];
 };
 
 /**
  * Make all properties in T required
  */
 type Required<T> = {
-    [P in keyof T]-?: T[P];
+  [P in keyof T]-?: T[P];
 };
 
 /**
  * Make all properties in T readonly
  */
 type Readonly<T> = {
-    readonly [P in keyof T]: T[P];
+  readonly [P in keyof T]: T[P];
 };
 
 /**
  * From T, pick a set of properties whose keys are in the union K
  */
 type Pick<T, K extends keyof T> = {
-    [P in K]: T[P];
+  [P in K]: T[P];
 };
 
 /**
  * Construct a type with a set of properties K of type T
  */
 type Record<K extends keyof any, T> = {
-    [P in K]: T;
+  [P in K]: T;
 };
 
 /**
@@ -153,22 +160,36 @@ type NonNullable<T> = T extends null | undefined ? never : T;
 /**
  * Obtain the parameters of a function type in a tuple
  */
-type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+type Parameters<T extends (...args: any) => any> = T extends (
+  ...args: infer P
+) => any
+  ? P
+  : never;
 
 /**
  * Obtain the parameters of a constructor function type in a tuple
  */
-type ConstructorParameters<T extends new (...args: any) => any> = T extends new (...args: infer P) => any ? P : never;
+type ConstructorParameters<
+  T extends new (...args: any) => any
+> = T extends new (...args: infer P) => any ? P : never;
 
 /**
  * Obtain the return type of a function type
  */
-type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any;
+type ReturnType<T extends (...args: any) => any> = T extends (
+  ...args: any
+) => infer R
+  ? R
+  : any;
 
 /**
  * Obtain the return type of a constructor function type
  */
-type InstanceType<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
+type InstanceType<T extends new (...args: any) => any> = T extends new (
+  ...args: any
+) => infer R
+  ? R
+  : any;
 ```
 
 ## 查找类型
@@ -176,25 +197,25 @@ type InstanceType<T extends new (...args: any) => any> = T extends new (...args:
 ```ts
 // old way
 interface Address {
-    city: string,
-    street: string,
-    num: number,
+  city: string;
+  street: string;
+  num: number;
 }
 
 interface Person {
-    addr: Address,
+  addr: Address;
 }
 
 // new way
 interface Person {
-    addr: {
-        city: string,
-        street: string,
-        num: number,
-    }
+  addr: {
+    city: string;
+    street: string;
+    num: number;
+  };
 }
 
-Person["addr"] // -> Address.
+Person["addr"]; // -> Address.
 ```
 
 ## 显式泛型
@@ -206,11 +227,11 @@ Person["addr"] // -> Address.
 ```ts
 type DeepReadonly<T> = {
   readonly [P in keyof T]: DeepReadonly<T[P]>;
-}
+};
 
 type DeepPartial<T> = {
   [P in keyof T]?: DeepPartial<T[P]>;
-}
+};
 
 /* and so on */
 ```

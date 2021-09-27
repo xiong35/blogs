@@ -1,5 +1,8 @@
+# Flutter 踩坑记录
 
-# app bar 的 leading icon
+> 关键词: Flutter, 踩坑记录
+
+## app bar 的 leading icon
 
 根据官方解释, leading 如果不设置是会进行自动推断的:
 
@@ -9,7 +12,7 @@
 如果没有抽屉且当前路由界面**不是应用的首页**, 则会变成返回按钮  
 如果都不是, 则为**空**
 
-# 内置组件的手势冲突问题
+## 内置组件的手势冲突问题
 
 使用`PageView`实现轮播图时, 想监听用户触摸以暂停轮播计时, 但是发现在外部无法监听到任何手势. 查阅[资料](https://book.flutterchina.club/chapter8/gesture.html)后发现 flutter 存在"手势竞争"的概念, 即当有多个手势识别器时, 可能会产生冲突, 只有一个被处理.
 
@@ -17,7 +20,7 @@
 
 详见[flutter 实战](https://book.flutterchina.club/chapter8/gesture.html)
 
-# 可滚动组件嵌套问题
+## 可滚动组件嵌套问题
 
 在一个可滚动组件内还想嵌套使用可滚动组件时, 由于 flutter 内部实际是不确定可滚动组件的长度的, 而且还可能存在手势冲突问题, 所以会产生奇怪的 bug.
 
@@ -32,15 +35,14 @@
 }
 ```
 
-# flutter HMR 的坑
+## flutter HMR 的坑
 
 在新增查 package 的时候不能直接热重载, 而要重启整个项目
 
-# flutter import 的问题
+## flutter import 的问题
 
 在 import 时路径分割不能用 `\` 或者`\\`, 必须用 `/`
 
-# flutter 在真机调试时不能联网
+## flutter 在真机调试时不能联网
 
 首先要在 xml 文件里请求获得联网权限, 其次安卓端只能访问 https 网址, 不能使用 http
-

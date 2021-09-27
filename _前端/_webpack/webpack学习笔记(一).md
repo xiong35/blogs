@@ -1,5 +1,6 @@
+# webpack 学习笔记(简介)
 
-# webpack学习笔记(简介)
+> 关键词: webpack
 
 ## 核心概念
 
@@ -19,37 +20,35 @@
 基本结构:
 
 ```js
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 通过 npm 安装
-const webpack = require('webpack'); // 用于访问内置插件
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // 通过 npm 安装
+const webpack = require("webpack"); // 用于访问内置插件
 
-const { resolve } = require('path');
+const { resolve } = require("path");
 
 mudule.exports = {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'build.js',
+    filename: "build.js",
     // __dirname: nodejs 变量, 代表当前文件目录绝对路径
-    path: resolve(__dirname, 'dist')
+    path: resolve(__dirname, "dist"),
   },
 
   // loader 配置
   module: {
-    rules: [
-      { test: /\.txt$/, use: 'raw-loader' },
-    ]
+    rules: [{ test: /\.txt$/, use: "raw-loader" }],
   },
 
   // plugin 配置
-  plugins: [
-    new HtmlWebpackPlugin({template: './src/index.html'})
-  ],
+  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
 
-  resolve: {/*  */},
+  resolve: {
+    /*  */
+  },
 
   // mode 配置, 默认为 dev
-  mode: 'development', // 'production'
-}
-``` 
+  mode: "development", // 'production'
+};
+```
 
 ### Entry
 
@@ -57,7 +56,7 @@ mudule.exports = {
 
 #### 数组形式
 
-会将多个文件合并到**第一个js文件**中, 最终只形成一个 js/bundle/chunk, 名称由 output 指定  
+会将多个文件合并到**第一个 js 文件**中, 最终只形成一个 js/bundle/chunk, 名称由 output 指定
 
 > 一般不使用, 要用也是在 HMR 中让 html 热更新
 
@@ -70,9 +69,9 @@ mudule.exports = {
 ```js
 const config = {
   entry: {
-    app: './src/app.js',
-    vendors: './src/vendors.js'
-  }
+    app: "./src/app.js",
+    vendors: "./src/vendors.js",
+  },
 };
 ```
 
@@ -85,14 +84,14 @@ const config = {
 ```js
 const config = {
   output: {
-    filename: 'js/[name].js',       // 如果Entry用了对对象形式, 需要有一个占位符          
-    path: '/home/public/assets',    // 打包生成文件的目录
-    publicPath: '/var/www/static',  // 生成的html中link的src属性的前缀
-                                    // 还可以写http地址(cdn加速时)
-    chunkFilename: 'js/[name]_chunk.js',  // 非入口的chunk名称
-    library: "[name]",        // 整个代码块向外暴露的变量名(通常是造轮子的时候要用)
-    libraryTarget: "window",  // 将变量名添加到哪里
-  }
+    filename: "js/[name].js", // 如果Entry用了对对象形式, 需要有一个占位符
+    path: "/home/public/assets", // 打包生成文件的目录
+    publicPath: "/var/www/static", // 生成的html中link的src属性的前缀
+    // 还可以写http地址(cdn加速时)
+    chunkFilename: "js/[name]_chunk.js", // 非入口的chunk名称
+    library: "[name]", // 整个代码块向外暴露的变量名(通常是造轮子的时候要用)
+    libraryTarget: "window", // 将变量名添加到哪里
+  },
 };
 ```
 
@@ -152,14 +151,14 @@ const config = {
 webpack 插件是一个具有 `apply` 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 `compiler` 对象可在整个编译生命周期访问
 
 ```js
-const pluginName = 'ConsoleLogOnBuildWebpackPlugin';
+const pluginName = "ConsoleLogOnBuildWebpackPlugin";
 
 class ConsoleLogOnBuildWebpackPlugin {
-    apply(compiler) {
-        compiler.hooks.run.tap(pluginName, compilation => {
-            console.log('webpack 构建过程开始！');
-        });
-    }
+  apply(compiler) {
+    compiler.hooks.run.tap(pluginName, (compilation) => {
+      console.log("webpack 构建过程开始！");
+    });
+  }
 }
 ```
 

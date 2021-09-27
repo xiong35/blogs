@@ -1,5 +1,6 @@
+# mysql 知识点杂记(一)
 
-# mysql知识点杂记(一)
+> 关键词: sql
 
 教程地址: [MySQL 基础+高级篇- 数据库 -sql -尚硅谷](https://www.bilibili.com/video/BV12b411K7Zu)
 
@@ -17,7 +18,7 @@ CREATE TABLE <表名> {
 2. default
 3. primary key
 4. unique
-5. check: 对值进行限制 (mysql不支持, 如果加了就静默失败)
+5. check: 对值进行限制 (mysql 不支持, 如果加了就静默失败)
 6. foreign key: 该字段的值必须来自主表的关联列的值
 
 外键只能当作**表级约束**, **列级约束**不能出现非空和默认
@@ -60,7 +61,7 @@ COMMIT; -- 提交, 或者: ROLLBACK;
 相当于封装了一个函数
 
 ```sql
-CREATE VIEW foo 
+CREATE VIEW foo
 -- CREATE OR REPLACE VIEW foo
 -- ALTER VIEW foo
 -- DROP VIEW foo [, bar]
